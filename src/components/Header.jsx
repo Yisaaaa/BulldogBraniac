@@ -4,7 +4,7 @@ import PrimaryLinkButton from "./PrimaryLinkButton";
 
 const Header = () => {
   return (
-    <header className="grid grid-cols-3 items-center fixed w-full left-0 top-0 px-60 py-4 bg-[#fff7ed] z-10">
+    <header className="grid grid-cols-3 items-center fixed w-full left-0 top-0 px-60 pt-4 pb-2 bg-[#fff7ed] z-10">
       <div className="flex items-center gap-4">
         <img src={logo} alt="image of a brainy bulldog" />
         <p className="text-3xl font-medium">BulldogBraniac</p>

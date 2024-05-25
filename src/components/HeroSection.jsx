@@ -22,7 +22,7 @@ const HeroSection = () => {
               Our interactive quiz reviews make learning easy and effective.
               Test your knowledge, see your progress, and excel in your studies.
             </p>
-            <div className="flex gap-2">
+            <div className="flex gap-4">
               <PrimaryLinkButton href={""} text={"Study now"} />
               <SecondaryLinkButton href={"#faq"} text={"Learn more"} />
             </div>
