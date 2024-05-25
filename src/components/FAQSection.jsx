@@ -45,10 +45,10 @@ const FAQSection = () => {
             </AccordionItem>
             <AccordionItem value="item-4">
               <AccordionTrigger className="text-2xl">
-                Can I use QuizReviewApp on my mobile device?
+                Can I use BulldogBraniac on my mobile device?
               </AccordionTrigger>
               <AccordionContent className="w-[90%] text-xl font-medium">
-                Unfortunately, the web version is not yet available.
+                Unfortunately, the mobile version is not yet available.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
