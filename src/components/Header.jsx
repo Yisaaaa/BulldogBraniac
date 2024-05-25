@@ -7,10 +7,10 @@ const Header = () => {
     <header className="grid grid-cols-3 items-center fixed w-full left-0 top-0 px-60 pt-4 pb-2 bg-[#fff7ed] z-10">
       <div className="flex items-center gap-4">
         <img src={logo} alt="image of a brainy bulldog" />
-        <p className="text-3xl font-medium">BulldogBraniac</p>
+        <p className="text-3xl font-semibold">BulldogBraniac</p>
       </div>
 
-      <div className="flex gap-6 font-medium justify-self-center text-lg">
+      <div className="flex gap-6 font-semibold justify-self-center text-lg">
         <a
           className="hover:text-primary transition-colors duration-150"
           href="#hero"
