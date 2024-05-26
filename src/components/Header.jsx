@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../assets/logo.svg";
 import PrimaryLinkButton from "./PrimaryLinkButton";
+import { FaArrowRight } from "react-icons/fa6";
 
 const Header = () => {
   return (
@@ -32,7 +33,7 @@ const Header = () => {
       </div>
 
       <div className="justify-self-end">
-        <PrimaryLinkButton href={""} text={"Get started"} />
+        <PrimaryLinkButton href={""}>Get started</PrimaryLinkButton>
       </div>
     </header>
   );

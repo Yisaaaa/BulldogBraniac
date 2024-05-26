@@ -2,6 +2,7 @@ import React from "react";
 import PrimaryLinkButton from "./PrimaryLinkButton";
 import SecondaryLinkButton from "./SecondaryLinkButton";
 import hero from "../assets/hero_img.svg";
+import { FaArrowDownLong } from "react-icons/fa6";
 
 const HeroSection = () => {
   return (
@@ -14,7 +15,7 @@ const HeroSection = () => {
           className={`grid grid-cols-2 justify-content-end justify-items-ends mx-18 gap-20 mt-28 mb-80`}
         >
           <div className="pt-20">
-            <h1 className="text-7xl font-semibold leading-tight mb-4">
+            <h1 className="text-6xl font-semibold leading-tight mb-4">
               Study <span className="text-primary">smarter</span>, <br />
               not harder
             </h1>
@@ -23,8 +24,12 @@ const HeroSection = () => {
               Test your knowledge, see your progress, and excel in your studies.
             </p>
             <div className="flex gap-4">
-              <PrimaryLinkButton href={""} text={"Study now"} />
-              <SecondaryLinkButton href={"#faq"} text={"Learn more"} />
+              <PrimaryLinkButton href={""}>Study now</PrimaryLinkButton>
+              <SecondaryLinkButton href={"#faq"}>
+                <span className="flex items-center gap-2">
+                  Learn more <FaArrowDownLong />
+                </span>
+              </SecondaryLinkButton>
             </div>
           </div>
           <img
