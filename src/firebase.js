@@ -3,7 +3,7 @@ import { getAuth } from "firebase/auth";
 import { connectAuthEmulator } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA5IwhLC7uxc34LXLEWbFW00MItcUUgc8w",
+  apiKey: import.meta.env.VITE_API_KEY,
   authDomain: "bulldogbraniac.firebaseapp.com",
   projectId: "bulldogbraniac",
   storageBucket: "bulldogbraniac.appspot.com",
@@ -15,4 +15,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
-connectAuthEmulator(auth, "http://localhost:9099");
+
+export { auth };

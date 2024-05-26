@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import logo from "../assets/logo.svg";
 import googleLogo from "../assets/google.svg";
+import { auth } from "../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Signin = () => {
   const [userCredentials, setUserCredentials] = useState({
@@ -9,9 +11,19 @@ const Signin = () => {
   });
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("sign in");
+    try {
+      const userCreds = await signInWithEmailAndPassword(
+        auth,
+        userCredentials.email,
+        userCredentials.password
+      );
+      console.log(userCreds);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleGoogleSignIn = (e) => {
@@ -31,7 +43,7 @@ const Signin = () => {
             className="text-primary text-lg font-semibold hover:text-[#c2410c] transition-colors duration-200"
             href="#"
           >
-            Sign up
+            Sign in
           </a>
         </header>
 
