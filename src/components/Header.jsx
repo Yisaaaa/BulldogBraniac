@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../assets/logo.svg";
 import PrimaryLinkButton from "./PrimaryLinkButton";
-import { FaArrowRight } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -33,7 +33,9 @@ const Header = () => {
       </div>
 
       <div className="justify-self-end">
-        <PrimaryLinkButton href={""}>Get started</PrimaryLinkButton>
+        <Link to={"/signin"}>
+          <PrimaryLinkButton href={""}>Get started</PrimaryLinkButton>
+        </Link>
       </div>
     </header>
   );

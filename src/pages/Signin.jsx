@@ -43,7 +43,7 @@ const Signin = () => {
             className="text-primary text-lg font-semibold hover:text-[#c2410c] transition-colors duration-200"
             href="#"
           >
-            Sign in
+            Sign up
           </a>
         </header>
 
