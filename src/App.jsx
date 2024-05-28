@@ -9,6 +9,7 @@ import { setUser } from "./reducers/userSlice";
 import { useDispatch } from "react-redux";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "./firebase";
+import Main from "./pages/Main";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const App = () => {
   return (
     <div className="">
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<Main />} />
         <Route path="/signin" element={<Signin />} />
         <Route
           path="*"
