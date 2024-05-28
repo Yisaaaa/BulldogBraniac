@@ -11,45 +11,75 @@ const Sidebar = ({ currentlySelected, setCurrentlySelected }) => {
       </header>
 
       <nav className="mb-6">
-        <ul className="flex flex-col gap-2">
-          <li className="pl-4 font-semibold hover:text-primary duration-300">
+        <ul className="flex flex-col gap-1">
+          <li
+            className={`pl-4 py-1 font-semibold ${
+              currentlySelected === "my quizzes" && "bg-[#FFEDD5]"
+            }`}
+          >
             <Link
               onClick={() => setCurrentlySelected("my quizzes")}
-              className={
-                currentlySelected === "my quizzes" &&
-                "bg-[#FFEDD5] text-primary"
-              }
+              className={` hover:text-primary duration-300 
+                ${
+                  currentlySelected === "my quizzes"
+                    ? "bg-[#FFEDD5] text-primary"
+                    : ""
+                }
+              `}
             >
               My Quizzes
             </Link>
           </li>
-          <li className="pl-4 font-semibold hover:text-primary duration-300">
+          <li
+            className={`pl-4 py-1 font-semibold ${
+              currentlySelected === "public quizzes" && "bg-[#FFEDD5]"
+            }`}
+          >
             <Link
               onClick={() => setCurrentlySelected("public quizzes")}
-              className={
-                currentlySelected === "public quizzes" &&
-                "bg-[#FFEDD5] text-primary"
-              }
+              className={` hover:text-primary duration-300 
+                ${
+                  currentlySelected === "public quizzes"
+                    ? "bg-[#FFEDD5] text-primary"
+                    : ""
+                }
+              `}
             >
               Public Quizzes
             </Link>
           </li>
-          <li className="pl-4 font-semibold hover:text-primary duration-300">
+          <li
+            className={`pl-4 py-1 font-semibold ${
+              currentlySelected === "home" && "bg-[#FFEDD5]"
+            }`}
+          >
             <Link
               onClick={() => setCurrentlySelected("home")}
-              className={
-                currentlySelected === "home" && "bg-[#FFEDD5] text-primary"
-              }
+              className={` hover:text-primary duration-300 
+                ${
+                  currentlySelected === "home"
+                    ? "bg-[#FFEDD5] text-primary"
+                    : ""
+                }
+              `}
             >
               Home
             </Link>
           </li>
-          <li className="pl-4 font-semibold hover:text-primary duration-300">
+          <li
+            className={`pl-4 py-1 font-semibold ${
+              currentlySelected === "profile" && "bg-[#FFEDD5]"
+            }`}
+          >
             <Link
               onClick={() => setCurrentlySelected("profile")}
-              className={
-                currentlySelected === "profile" && "bg-[#FFEDD5] text-primary"
-              }
+              className={` hover:text-primary duration-300 
+                ${
+                  currentlySelected === "profile"
+                    ? "bg-[#FFEDD5] text-primary"
+                    : ""
+                }
+              `}
             >
               Profile
             </Link>
@@ -57,7 +87,7 @@ const Sidebar = ({ currentlySelected, setCurrentlySelected }) => {
         </ul>
       </nav>
       <div className="flex px-4">
-        <button className="bg-primary rounded-full mx-auto w-full py-1 font-semibold text-white">
+        <button className="bg-primary rounded-full mx-auto w-full py-1 font-semibold text-white hover:bg-[#c2410c] transition-colors duration-300">
           Create quiz
         </button>
       </div>

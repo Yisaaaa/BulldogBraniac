@@ -4,7 +4,7 @@ import Sidebar from "../components/Sidebar";
 const Main = () => {
   const [currentlySelected, setCurrentlySelected] = useState("home");
   return (
-    <div className="bg-[#FFFAF5]">
+    <div className="bg-[#FFF7ED]">
       <Sidebar
         currentlySelected={currentlySelected}
         setCurrentlySelected={setCurrentlySelected}
