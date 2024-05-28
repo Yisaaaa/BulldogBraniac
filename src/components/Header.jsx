@@ -33,9 +33,9 @@ const Header = () => {
       </div>
 
       <div className="justify-self-end">
-        <Link to={"/signin"}>
-          <PrimaryLinkButton href={""}>Get started</PrimaryLinkButton>
-        </Link>
+        <PrimaryLinkButton to={"/signin"} href={""}>
+          Get started
+        </PrimaryLinkButton>
       </div>
     </header>
   );

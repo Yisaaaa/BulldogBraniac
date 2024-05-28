@@ -17,7 +17,6 @@ const App = () => {
     const subscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log("user logged in");
-        user = user.toJSON();
         dispatch(setUser(user));
       } else {
         console.log("no user");
@@ -30,8 +29,6 @@ const App = () => {
   return (
     <div className="">
       <Routes>
-        {/* <LandingPage /> */}
-        {/* <Signin></Signin> */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/signin" element={<Signin />} />
         <Route

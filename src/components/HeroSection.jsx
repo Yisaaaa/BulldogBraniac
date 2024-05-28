@@ -25,9 +25,9 @@ const HeroSection = () => {
               Test your knowledge, see your progress, and excel in your studies.
             </p>
             <div className="flex gap-4 items-center">
-              <Link to={"/signin"}>
-                <PrimaryLinkButton href={""}>Study now</PrimaryLinkButton>
-              </Link>
+              <PrimaryLinkButton to={"/signin"} href={""}>
+                Study now
+              </PrimaryLinkButton>
               <SecondaryLinkButton href={"#faq"}>
                 <span className="flex items-center gap-2">
                   Learn more <FaArrowDownLong />

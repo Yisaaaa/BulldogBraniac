@@ -1,13 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const PrimaryLinkButton = ({ href, className, children }) => {
+const PrimaryLinkButton = ({ href, className, children, to }) => {
   return (
-    <a
+    <Link
+      to={to}
       className={`bg-primary text-primary-foreground px-4 py-2 rounded-full font-semibold hover:animate-pulse hover:bg-[#c2410c] transition-colors duration-300 ${className}`}
-      href={href}
     >
       {children}
-    </a>
+    </Link>
   );
 };
 
