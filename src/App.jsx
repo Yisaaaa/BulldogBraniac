@@ -7,6 +7,8 @@ import { auth } from "./firebase";
 import { signOut } from "firebase/auth";
 import { setUser } from "./reducers/userSlice";
 import { useDispatch } from "react-redux";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "./firebase";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -14,10 +16,13 @@ const App = () => {
   useEffect(() => {
     signOut(auth);
 
-    const subscribe = onAuthStateChanged(auth, (user) => {
+    const subscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         console.log("user logged in");
-        dispatch(setUser(user));
+        const userRef = doc(db, `users/${user.uid}`);
+        user = await getDoc(userRef);
+        console.log(user.data());
+        dispatch(setUser(user.data()));
       } else {
         console.log("no user");
       }
