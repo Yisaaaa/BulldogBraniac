@@ -20,7 +20,7 @@ const Signin = () => {
         userCredentials.email,
         userCredentials.password
       );
-      console.log(userCreds);
+      // console.log(userCreds);
     } catch (error) {
       console.log(error);
     }
