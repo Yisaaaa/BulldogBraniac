@@ -28,8 +28,10 @@ const App = () => {
         user = JSON.stringify((await getDoc(userRef)).data());
         dispatch(setUser(JSON.parse(user)));
         navigate("/main");
+        setIsLoading(false);
       } else {
         console.log("no user");
+        setIsLoading(false);
       }
 
       setIsLoading(false);
