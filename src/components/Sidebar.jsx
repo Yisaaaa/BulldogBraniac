@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Sidebar = ({ currentlySelected, setCurrentlySelected }) => {
   return (
-    <div className="w-72 h-screen py-6 border-r-[2px] border-r-[#ddd] ">
+    <div className="h-screen py-6 border-r-[2px] border-r-[#ddd] ">
       <header className="px-6 mb-6 ">
         <img className="w-20" src={logo} alt="BulldogBraniac logo" />
         <p className="font-semibold text-3xl">BulldogBraniac</p>
@@ -54,6 +54,7 @@ const Sidebar = ({ currentlySelected, setCurrentlySelected }) => {
             }`}
           >
             <Link
+              to={"home"}
               onClick={() => setCurrentlySelected("home")}
               className={` hover:text-primary duration-300 text-xl
                 ${

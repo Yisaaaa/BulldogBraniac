@@ -23,7 +23,6 @@ const Signin = () => {
         userCredentials.email,
         userCredentials.password
       );
-      setIsLoading(false);
 
       // console.log(userCreds);
     } catch (error) {
@@ -110,10 +109,10 @@ const Signin = () => {
                   type="submit"
                 >
                   {isLoading ? (
-                    <span>
+                    <div className="flex gap-2 justify-center items-center">
                       <VscLoading className="animate-spin" />
-                      Signing in...
-                    </span>
+                      <span>Signing in...</span>
+                    </div>
                   ) : (
                     "Continue"
                   )}

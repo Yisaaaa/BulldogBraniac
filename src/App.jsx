@@ -10,12 +10,12 @@ import {
 } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
-import { signOut } from "firebase/auth";
 import { setUser } from "./reducers/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "./firebase";
 import MainPage from "./pages/MainPage";
+import HomePage from "./pages/HomePage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -25,8 +25,6 @@ const App = () => {
   console.log(user);
 
   useEffect(() => {
-    signOut(auth);
-
     const subscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         console.log("user logged in");
@@ -50,7 +48,9 @@ const App = () => {
         <Route
           path="/main"
           element={user ? <MainPage /> : <Navigate replace to="/signin" />}
-        />
+        >
+          <Route path="home" element={<HomePage />} />
+        </Route>
         <Route path="/signin" element={<Signin />} />
         <Route
           path="*"
