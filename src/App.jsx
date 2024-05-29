@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import LandingPage from "./pages/LandingPage";
 import Signin from "./pages/Signin";
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
@@ -11,39 +11,43 @@ import { db } from "./firebase";
 import MainPage from "./pages/MainPage";
 import HomePage from "./pages/HomePage";
 import Signup from "./pages/Signup";
+import Loading from "./components/Loading";
 
 const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
-  console.log(user);
-
   useEffect(() => {
-    signOut(auth);
-
     const subscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         console.log("user logged in");
         const userRef = doc(db, `users/${user.uid}`);
         user = JSON.stringify((await getDoc(userRef)).data());
-        console.log(JSON.stringify(user));
         dispatch(setUser(JSON.parse(user)));
         navigate("/main");
       } else {
         console.log("no user");
       }
 
+      setIsLoading(false);
+
       return subscribe;
     });
   }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="">
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route
-          path="/main"
+          path="/main/*"
           element={user ? <MainPage /> : <Navigate replace to="/signin" />}
         >
           <Route path="home" element={<HomePage />} />
