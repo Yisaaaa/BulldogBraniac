@@ -41,7 +41,7 @@ const Signin = () => {
     <div className="flex items-center justify-center bg-[#FED7AA] w-screen h-screen">
       <main className="bg-white rounded-xl py-6 px-4">
         <header className="flex gap-24 items-center mb-12">
-          <div className="flex gap-2 items-center">
+          <div>
             <img src={logo} alt="image of a brainy bulldog with glasses" />
             <p className="font-semibold text-2xl">BulldogBraniac</p>
           </div>

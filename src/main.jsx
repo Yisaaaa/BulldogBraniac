@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
+import Signup from "./pages/Signup.jsx";
 import "./index.css";
 import store from "./store.js";
 import { Provider } from "react-redux";
@@ -14,7 +14,7 @@ store.subscribe(() => {
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <Router>
-      <App />
+      <Signup />
     </Router>
   </Provider>
 );
