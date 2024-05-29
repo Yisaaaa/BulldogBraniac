@@ -1,7 +1,6 @@
 import React from "react";
 import logo from "../assets/logo.svg";
 import PrimaryLinkButton from "./PrimaryLinkButton";
-import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -26,7 +25,7 @@ const Header = () => {
         </a>
         <a
           className="hover:text-primary transition-colors duration-150"
-          href=""
+          href="#aboutus"
         >
           About us
         </a>
