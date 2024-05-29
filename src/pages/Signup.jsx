@@ -3,6 +3,8 @@ import logo from "../assets/logo.svg";
 import googleLogo from "../assets/google.svg"
 
 const Signup = () => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
   return (
     <div className="flex items-center justify-center bg-[#FED7AA] w-screen h-screen overflow-x-hidden">
         <div className="bg-white rounded-xl py-6 px-4 max-w-395 max-h-500">
@@ -39,12 +41,16 @@ const Signup = () => {
             </label>
 
             <input className="border-2 border-slate-300 rounded-md p-2 font-medium" 
-            type="password"
+            type={passwordVisible ? "text" : "password"}
+            id="password"
             placeholder="password"
             />
             </div>
             <span className="flex self-end gap-2 text-sm text-slate-500 font-medium"  >
-              <input type="checkbox" name="showPassword" id="showPassword" />
+              <input type="checkbox"
+              onChange={(e) => setPasswordVisible((prev) => !prev)} 
+              id="showPassword" 
+              />
               <label htmlFor="showPassword">Show password</label>
             </span>
 
