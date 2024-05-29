@@ -1,14 +1,8 @@
 import React, { useEffect } from "react";
 import LandingPage from "./pages/LandingPage";
 import Signin from "./pages/Signin";
-import {
-  Routes,
-  Route,
-  useNavigate,
-  redirect,
-  Navigate,
-} from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./firebase";
 import { setUser } from "./reducers/userSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +10,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "./firebase";
 import MainPage from "./pages/MainPage";
 import HomePage from "./pages/HomePage";
+import Signup from "./pages/Signup";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -25,6 +20,8 @@ const App = () => {
   console.log(user);
 
   useEffect(() => {
+    signOut(auth);
+
     const subscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         console.log("user logged in");
@@ -52,6 +49,7 @@ const App = () => {
           <Route path="home" element={<HomePage />} />
         </Route>
         <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
         <Route
           path="*"
           element={

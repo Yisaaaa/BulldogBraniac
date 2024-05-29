@@ -4,6 +4,7 @@ import googleLogo from "../assets/google.svg";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { VscLoading } from "react-icons/vsc";
+import { Link } from "react-router-dom";
 
 const Signin = () => {
   const [userCredentials, setUserCredentials] = useState({
@@ -40,16 +41,17 @@ const Signin = () => {
     <div className="flex items-center justify-center bg-[#FED7AA] w-screen h-screen">
       <main className="bg-white rounded-xl py-6 px-4">
         <header className="flex gap-24 items-center mb-12">
-          <div>
+          <div className="flex gap-2 items-center">
             <img src={logo} alt="image of a brainy bulldog with glasses" />
             <p className="font-semibold text-2xl">BulldogBraniac</p>
           </div>
-          <a
+          <Link
+            to={"/signup"}
             className="text-primary text-lg font-semibold hover:text-[#c2410c] transition-colors duration-200"
             href="#"
           >
             Sign up
-          </a>
+          </Link>
         </header>
 
         <div>
@@ -110,7 +112,7 @@ const Signin = () => {
                 >
                   {isLoading ? (
                     <div className="flex gap-2 justify-center items-center">
-                      <VscLoading className="animate-spin" />
+                      <VscLoading className="animate-spin text-2xl" />
                       <span>Signing in...</span>
                     </div>
                   ) : (
