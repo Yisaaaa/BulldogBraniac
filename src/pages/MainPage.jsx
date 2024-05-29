@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 
-const Main = () => {
+const MainPage = () => {
   const [currentlySelected, setCurrentlySelected] = useState("home");
   return (
     <div className="bg-[#FFF7ED]">
@@ -13,4 +13,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default MainPage;
