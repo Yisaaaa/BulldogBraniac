@@ -20,7 +20,7 @@ const App = () => {
   console.log(user);
 
   useEffect(() => {
-    // signOut(auth);
+    signOut(auth);
 
     const subscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {

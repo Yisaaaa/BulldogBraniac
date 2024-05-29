@@ -19,71 +19,72 @@ body {
 }
 
 .aboutUsH1 {
-    margin-left: 7rem;
-    font-size: 70px;
-    padding-bottom: 3rem;
+  margin-left: 23rem;
+  font-size: 2.25rem;
+  padding-bottom: 3rem;
+  font-weight: 800;
 }
 
 .AboutUScircle1 {
-    position: absolute;
-    top: 0;
-    left: auto;
+  position: absolute;
+  top: 0;
+  left: auto;
 }
 
 .AboutUsContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    border-radius: 100%;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border-radius: 100%;
+  width: 100%;
 }
 
 .AUFile {
-    display: flex;
-    align-items: flex-start; /* Align items vertically to the start */
-    justify-content: start; /* Start alignment */
-    width: 80%;
-    margin-left: auto; /* Auto margin to push the content to the right */
-    margin-right: 2rem; /* Adjust the right margin as needed */
-    margin-bottom: 3rem;
+  display: flex;
+  align-items: flex-start; /* Align items vertically to the start */
+  justify-content: start; /* Start alignment */
+  width: 80%;
+  margin-left: auto; /* Auto margin to push the content to the right */
+  margin-right: 2rem; /* Adjust the right margin as needed */
+  margin-bottom: 3rem;
 }
 
 .dan {
-    align-items: flex-end;
-    justify-content: end;
-    width: 100%;
-    margin-left: auto; /* Auto margin to push the content to the right */
-    margin-bottom: 2rem;
+  align-items: flex-end;
+  justify-content: end;
+  width: 100%;
+  margin-left: auto; /* Auto margin to push the content to the right */
+  margin-bottom: 2rem;
 }
 
 .emenel {
-    align-items: flex-end;
-    justify-content: end;
-    width: 90%;
-    margin-left: auto; /* Auto margin to push the content to the right */
-    margin-right: 6.5rem; /* Adjust the right margin as needed */
-    
+  align-items: flex-end;
+  justify-content: end;
+  width: 90%;
+  margin-left: auto; /* Auto margin to push the content to the right */
+  margin-right: 6.5rem; /* Adjust the right margin as needed */
 }
 
 .AUFile img {
-    width: 150px; 
-    height: auto;
-    margin-right: 20px;
+  width: 150px;
+  height: auto;
+  margin-right: 20px;
 }
 
 .AUFile .aboutUsInfo {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Style h2 and p */
 .AUFile .aboutUsInfo .aboutUsh2 {
-    margin: 0;
-    font-size: 30px;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
 }
 
 .AUFile .aboutUsInfo .aboutUsP {
-    margin: 10px 0 0 0;
-    font-size: 15px;
-    width: 55%;
+  margin: 10px 0 0 0;
+  font-size: 18px;
+  width: 55%;
 }
