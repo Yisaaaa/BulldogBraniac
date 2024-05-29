@@ -1,12 +1,18 @@
 import React, { useEffect } from "react";
 import LandingPage from "./pages/LandingPage";
 import Signin from "./pages/Signin";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useNavigate,
+  redirect,
+  Navigate,
+} from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { signOut } from "firebase/auth";
 import { setUser } from "./reducers/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "./firebase";
 import MainPage from "./pages/MainPage";
@@ -14,6 +20,9 @@ import MainPage from "./pages/MainPage";
 const App = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+
+  console.log(user);
 
   useEffect(() => {
     signOut(auth);
@@ -38,7 +47,10 @@ const App = () => {
     <div className="">
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/main" element={<MainPage />} />
+        <Route
+          path="/main"
+          element={user ? <MainPage /> : <Navigate replace to="/signin" />}
+        />
         <Route path="/signin" element={<Signin />} />
         <Route
           path="*"

@@ -3,6 +3,7 @@ import logo from "../assets/logo.svg";
 import googleLogo from "../assets/google.svg";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { VscLoading } from "react-icons/vsc";
 
 const Signin = () => {
   const [userCredentials, setUserCredentials] = useState({
@@ -10,18 +11,23 @@ const Signin = () => {
     password: "",
   });
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("sign in");
+    setIsLoading(true);
     try {
       const userCreds = await signInWithEmailAndPassword(
         auth,
         userCredentials.email,
         userCredentials.password
       );
+      setIsLoading(false);
+
       // console.log(userCreds);
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -103,7 +109,14 @@ const Signin = () => {
                   className="rounded-full bg-primary text-white font-semibold text-md py-2 hover:bg-[#c2410c] transition-colors duration-200"
                   type="submit"
                 >
-                  Continue
+                  {isLoading ? (
+                    <span>
+                      <VscLoading className="animate-spin" />
+                      Signing in...
+                    </span>
+                  ) : (
+                    "Continue"
+                  )}
                 </button>
                 <p className="flex gap-5 items-center text-sm font-medium text-gray-500 self-center">
                   <span className="h-1 w-20 bg-neutral-400 rounded"></span>Or
