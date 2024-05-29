@@ -11,3 +11,79 @@ body {
   /* color: #212427; */
   color: #333;
 }
+
+.body {
+  background-color: #fb923c;
+  color: white;
+  padding-bottom: 20px;
+}
+
+.aboutUsH1 {
+    margin-left: 7rem;
+    font-size: 70px;
+    padding-bottom: 3rem;
+}
+
+.AboutUScircle1 {
+    position: absolute;
+    top: 0;
+    left: auto;
+}
+
+.AboutUsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border-radius: 100%;
+    width: 100%;
+}
+
+.AUFile {
+    display: flex;
+    align-items: flex-start; /* Align items vertically to the start */
+    justify-content: start; /* Start alignment */
+    width: 80%;
+    margin-left: auto; /* Auto margin to push the content to the right */
+    margin-right: 2rem; /* Adjust the right margin as needed */
+    margin-bottom: 3rem;
+}
+
+.dan {
+    align-items: flex-end;
+    justify-content: end;
+    width: 100%;
+    margin-left: auto; /* Auto margin to push the content to the right */
+    margin-bottom: 2rem;
+}
+
+.emenel {
+    align-items: flex-end;
+    justify-content: end;
+    width: 90%;
+    margin-left: auto; /* Auto margin to push the content to the right */
+    margin-right: 6.5rem; /* Adjust the right margin as needed */
+    
+}
+
+.AUFile img {
+    width: 150px; 
+    height: auto;
+    margin-right: 20px;
+}
+
+.AUFile .aboutUsInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Style h2 and p */
+.AUFile .aboutUsInfo .aboutUsh2 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.AUFile .aboutUsInfo .aboutUsP {
+    margin: 10px 0 0 0;
+    font-size: 15px;
+    width: 55%;
+}
