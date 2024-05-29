@@ -4,7 +4,7 @@ import { connectAuthEmulator } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_API_KEY,
+  apiKey: "AIzaSyA5IwhLC7uxc34LXLEWbFW00MItcUUgc8w",
   authDomain: "bulldogbraniac.firebaseapp.com",
   projectId: "bulldogbraniac",
   storageBucket: "bulldogbraniac.appspot.com",
