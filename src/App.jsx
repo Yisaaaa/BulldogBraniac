@@ -20,15 +20,15 @@ const App = () => {
   console.log(user);
 
   useEffect(() => {
-    signOut(auth);
+    // signOut(auth);
 
     const subscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         console.log("user logged in");
         const userRef = doc(db, `users/${user.uid}`);
-        user = await getDoc(userRef);
-        console.log(user.data());
-        dispatch(setUser(user.data()));
+        user = JSON.stringify((await getDoc(userRef)).data());
+        console.log(JSON.stringify(user));
+        dispatch(setUser(JSON.parse(user)));
         navigate("/main");
       } else {
         console.log("no user");

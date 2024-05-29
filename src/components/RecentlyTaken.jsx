@@ -5,6 +5,14 @@ import { db } from "../firebase";
 
 const RecentlyTaken = () => {
   let recentQuizzes = useSelector((state) => state.user.recentQuizzes);
+  const recents = [];
+
+  recentQuizzes.forEach(async (quiz) => {
+    const quizRef = doc(db, `quizzes/${quiz}`);
+    recents.push((await getDoc(quizRef)).data());
+  });
+
+  console.log(recents);
 
   return (
     <div>
