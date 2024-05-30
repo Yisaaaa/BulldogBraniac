@@ -5,20 +5,22 @@ import { useSelector } from "react-redux";
 import { yearColors, subjectColors } from "../colors";
 import Tag from "./Tag";
 import { Link } from "react-router-dom";
+import { VscLoading } from "react-icons/vsc";
 
 const QuizCard = ({ quiz, userId }) => {
+  const user = useSelector((state) => state.user);
   const [quizUser, setQuizUser] = useState(null);
-
-  console.log(userId, quiz.userId);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const checkIfSameUer = async () => {
       if (userId !== quiz.userId) {
-        console.log("not by user");
         const user = await getDoc(doc(db, `users/${quiz.userId}`));
         setQuizUser(user.data());
+        setIsLoading(false);
       } else {
-        setQuizUser(useSelector((state) => state.user));
+        setQuizUser(user);
+        setIsLoading(false);
       }
     };
 
@@ -36,15 +38,21 @@ const QuizCard = ({ quiz, userId }) => {
           <Tag color={subjectColors[quiz.subject]}>{quiz.subject}</Tag>
           <Tag color={yearColors[quiz.year]}>{quiz.year}</Tag>
         </div>
-        {quizUser && (
-          <div className="flex gap-2 items-end">
-            <img
-              className="w-7 rounded-full p-1 bg-[#818CF8]"
-              src={quizUser.profileUrl}
-              alt=""
-            />
-            <p className="font-semibold  text-gray-500">{quizUser.username}</p>
-          </div>
+        {isLoading ? (
+          <VscLoading className="text-base font-bold animate-spin" />
+        ) : (
+          quizUser && (
+            <div className="flex gap-2 items-end">
+              <img
+                className="w-7 rounded-full p-1 bg-[#818CF8]"
+                src={quizUser.profileUrl}
+                alt=""
+              />
+              <p className="font-semibold  text-gray-500">
+                {quizUser.username}
+              </p>
+            </div>
+          )
         )}
       </div>
     </Link>

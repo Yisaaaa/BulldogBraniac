@@ -16,8 +16,6 @@ const PublicQuizzesPage = () => {
     });
   }, []);
 
-  console.log(quizzes);
-
   return (
     <div className="flex relative overflow-scroll">
       <div className="w-[65%] mx-auto pt-28 overflow-y-scroll no-scrollbar scroll-smooth">

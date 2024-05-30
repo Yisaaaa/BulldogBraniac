@@ -10,8 +10,6 @@ const RecentlyTaken = () => {
   const [recents, setRecents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log(user.recentQuizzes);
-
   useEffect(() => {
     fetchQuizzes(user.recentQuizzes).then((res) => {
       setIsLoading(false);
@@ -22,8 +20,6 @@ const RecentlyTaken = () => {
   if (isLoading) {
     return <LoadingSmall />;
   }
-
-  console.log(recents);
 
   return (
     <div>

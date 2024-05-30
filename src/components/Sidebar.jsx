@@ -1,8 +1,14 @@
 import React from "react";
 import logo from "../assets/logo.svg";
-import { Link } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
+import { useState } from "react";
 
-const Sidebar = ({ currentlySelected, setCurrentlySelected }) => {
+const Sidebar = () => {
+  const matchHome = useMatch("/main/home");
+  const matchMyQuizzes = useMatch("/main/my-quizzes");
+  const matchPublicQuizzes = useMatch("/main/public-quizzes");
+  const matchProfile = useMatch("/main/profile");
+
   return (
     <div className="h-screen py-6 border-r-[2px] border-r-[#ddd] ">
       <header className="px-6 mb-6 ">
@@ -14,18 +20,13 @@ const Sidebar = ({ currentlySelected, setCurrentlySelected }) => {
         <ul className="flex flex-col">
           <li
             className={`pl-6 py-1 font-semibold ${
-              currentlySelected === "my quizzes" && "bg-[#FFEDD5]"
+              matchMyQuizzes && "bg-[#FFEDD5]"
             }`}
           >
             <Link
               to={"my-quizzes"}
-              onClick={() => setCurrentlySelected("my quizzes")}
               className={` hover:text-primary duration-300 text-xl
-                ${
-                  currentlySelected === "my quizzes"
-                    ? "bg-[#FFEDD5] text-primary"
-                    : ""
-                }
+                ${matchMyQuizzes ? "bg-[#FFEDD5] text-primary" : ""}
               `}
             >
               My Quizzes
@@ -33,37 +34,25 @@ const Sidebar = ({ currentlySelected, setCurrentlySelected }) => {
           </li>
           <li
             className={`pl-6 py-1 font-semibold ${
-              currentlySelected === "public quizzes" && "bg-[#FFEDD5]"
+              matchPublicQuizzes && "bg-[#FFEDD5]"
             }`}
           >
             <Link
               to={"public-quizzes"}
-              onClick={() => setCurrentlySelected("public quizzes")}
               className={` hover:text-primary duration-300 text-xl
-                ${
-                  currentlySelected === "public quizzes"
-                    ? "bg-[#FFEDD5] text-primary"
-                    : ""
-                }
+                ${matchPublicQuizzes ? "bg-[#FFEDD5] text-primary" : ""}
               `}
             >
               Public Quizzes
             </Link>
           </li>
           <li
-            className={`pl-6 py-1 font-semibold ${
-              currentlySelected === "home" && "bg-[#FFEDD5]"
-            }`}
+            className={`pl-6 py-1 font-semibold ${matchHome && "bg-[#FFEDD5]"}`}
           >
             <Link
               to={"home"}
-              onClick={() => setCurrentlySelected("home")}
               className={` hover:text-primary duration-300 text-xl
-                ${
-                  currentlySelected === "home"
-                    ? "bg-[#FFEDD5] text-primary"
-                    : ""
-                }
+                ${matchHome ? "bg-[#FFEDD5] text-primary" : ""}
               `}
             >
               Home
@@ -71,17 +60,12 @@ const Sidebar = ({ currentlySelected, setCurrentlySelected }) => {
           </li>
           <li
             className={`pl-6 py-1 font-semibold ${
-              currentlySelected === "profile" && "bg-[#FFEDD5]"
+              matchProfile && "bg-[#FFEDD5]"
             }`}
           >
             <Link
-              onClick={() => setCurrentlySelected("profile")}
               className={` hover:text-primary duration-300 text-xl
-                ${
-                  currentlySelected === "profile"
-                    ? "bg-[#FFEDD5] text-primary"
-                    : ""
-                }
+                ${matchProfile ? "bg-[#FFEDD5] text-primary" : ""}
               `}
             >
               Profile

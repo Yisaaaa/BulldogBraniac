@@ -31,7 +31,7 @@ const App = () => {
   const matchSignInUrl = useMatch("/signin");
 
   useEffect(() => {
-    signOut(auth);
+    // signOut(auth);
 
     const subscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
