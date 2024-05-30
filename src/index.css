@@ -12,6 +12,16 @@ body {
   color: #333;
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Author: DenJiwooo */
 .body {
   background-color: #fb923c;
   color: white;

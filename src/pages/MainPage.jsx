@@ -16,7 +16,7 @@ const MainPage = () => {
   }, []);
 
   return (
-    <div className="bg-[#FFF7ED] grid grid-cols-[18rem_1fr]">
+    <div className="bg-[#FFF7ED] grid grid-cols-[18rem_1fr] h-screen overflow-hidden">
       <Sidebar
         currentlySelected={currentlySelected}
         setCurrentlySelected={setCurrentlySelected}

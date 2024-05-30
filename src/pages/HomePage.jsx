@@ -6,8 +6,8 @@ import RecentlyTaken from "../components/RecentlyTaken";
 const HomePage = () => {
   const user = useSelector((state) => state.user);
   return (
-    <div className="flex relative">
-      <div className="w-[65%] mx-auto pt-12">
+    <div className="flex relative overflow-scroll">
+      <div className="w-[65%] mx-auto pt-12 overflow-y-scroll no-scrollbar scroll-smooth">
         <header className="text-center mb-14">
           <h1 className="text-4xl font-semibold mb-2">Just get Started!</h1>
           <p className="font-semibold text-lg text-neutral-500">
