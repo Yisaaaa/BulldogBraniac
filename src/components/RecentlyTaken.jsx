@@ -35,7 +35,7 @@ const RecentlyTaken = () => {
           })}
         </div>
       ) : (
-        <p>No Recently taken quiz yet</p>
+        <p className="text-xl font-medium">No recently taken quiz yet</p>
       )}
     </div>
   );
