@@ -6,12 +6,12 @@ import { yearColors, subjectColors } from "../colors";
 import Tag from "./Tag";
 import { Link } from "react-router-dom";
 
-const QuizCard = ({ quiz }) => {
+const QuizCard = ({ quiz, userId }) => {
   let user = useSelector((state) => state.user);
 
   useEffect(() => {
     const checkIfSameUer = async () => {
-      if (user.id !== quiz.userId) {
+      if (userId !== quiz.userId) {
         user = await getDoc(doc(db, `users/${quiz.userId}`));
       }
     };
@@ -19,19 +19,16 @@ const QuizCard = ({ quiz }) => {
     checkIfSameUer();
   }, []);
 
-  const subject = `bg-[${subjectColors[quiz.subject]}]`;
-  const year = `bg-[${yearColors[quiz.year]}]`;
-  const border = `border-r-[${subjectColors[quiz.subject]}]`;
-
   return (
     <Link className="hover:scale-105 transition-all duration-200">
       <div
-        className={`border-r-[68px] ${border} rounded-lg bg-white active:bg-gray-200 transition-colors duration-200 px-4 py-4 drop-shadow-lg`}
+        style={{ borderRightColor: subjectColors[quiz.subject] }}
+        className={`border-r-[68px] rounded-lg bg-white active:bg-gray-200 transition-colors duration-200 px-4 py-4 drop-shadow-lg`}
       >
         <p className="text-xl font-semibold mb-5">{quiz.title}</p>
         <div className="flex gap-2 mb-6">
-          <Tag color={subject}>{quiz.subject}</Tag>
-          <Tag color={year}>{quiz.year}</Tag>
+          <Tag color={subjectColors[quiz.subject]}>{quiz.subject}</Tag>
+          <Tag color={yearColors[quiz.year]}>{quiz.year}</Tag>
         </div>
         <div className="flex gap-2 items-end">
           <img

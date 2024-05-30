@@ -1,4 +1,4 @@
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
 
 const fetchQuizzes = async (quizIds) => {
@@ -12,4 +12,21 @@ const fetchQuizzes = async (quizIds) => {
   return temp;
 };
 
-export { fetchQuizzes };
+const fetchPublicQuizzes = async (userId) => {
+  const snapshot = await getDocs(collection(db, "quizzes"));
+
+  const temp = [];
+
+  snapshot.forEach((quiz) => {
+    const data = quiz.data();
+
+    if (data.userId !== userId) {
+      temp.push(data);
+    }
+  });
+
+  await Promise.all(temp);
+  return temp;
+};
+
+export { fetchQuizzes, fetchPublicQuizzes };

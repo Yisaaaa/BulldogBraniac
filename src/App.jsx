@@ -19,6 +19,7 @@ import HomePage from "./pages/HomePage";
 import Signup from "./pages/Signup";
 import Loading from "./components/Loading";
 import MyQuizzesPage from "./pages/MyQuizzesPage";
+import PublicQuizzesPage from "./pages/PublicQuizzesPage";
 
 const App = () => {
   const matchLandingPage = useMatch("/");
@@ -30,6 +31,8 @@ const App = () => {
   const matchSignInUrl = useMatch("/signin");
 
   useEffect(() => {
+    signOut(auth);
+
     const subscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         console.log("user logged in");
@@ -66,6 +69,7 @@ const App = () => {
           element={user ? <MainPage /> : <Navigate replace to="/signin" />}
         >
           <Route path="home" element={<HomePage />} />
+          <Route path="public-quizzes" element={<PublicQuizzesPage />} />
           <Route path="my-quizzes" element={<MyQuizzesPage />} />
         </Route>
         <Route path="/signin" element={<Signin />} />

@@ -1,32 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { fetchQuizzes } from "../services";
+import { fetchPublicQuizzes } from "../services";
 import QuizCard from "../components/QuizCard";
 import { useSelector } from "react-redux";
 import LoadingSmall from "../components/LoadingSmall";
 
-const MyQuizzesPage = () => {
-  const user = useSelector((state) => state.user);
+const PublicQuizzesPage = () => {
+  const userId = useSelector((state) => state.user.id);
   const [quizzes, setQuizzes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchQuizzes(user.myQuizzes).then((res) => {
+    fetchPublicQuizzes(userId).then((res) => {
       setIsLoading(false);
       setQuizzes(res);
     });
   }, []);
 
+  console.log(quizzes);
+
   return (
     <div className="flex relative overflow-scroll">
       <div className="w-[65%] mx-auto pt-28 overflow-y-scroll no-scrollbar scroll-smooth">
         <div className="px-28">
-          <h1 className="text-4xl font-medium mb-16">My Quizzes</h1>
+          <h1 className="text-4xl font-medium mb-16">Public Quizzes</h1>
           {isLoading ? (
             <LoadingSmall />
           ) : (
             <div className="flex flex-col gap-6">
               {quizzes.map((quiz) => (
-                <QuizCard key={quiz.id} userId={user.id} quiz={quiz} />
+                <QuizCard key={quiz.id} userId={quiz.userId} quiz={quiz} />
               ))}
             </div>
           )}
@@ -36,4 +38,4 @@ const MyQuizzesPage = () => {
   );
 };
 
-export default MyQuizzesPage;
+export default PublicQuizzesPage;
