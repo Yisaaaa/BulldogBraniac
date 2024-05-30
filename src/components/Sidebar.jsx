@@ -11,7 +11,7 @@ const Sidebar = ({ currentlySelected, setCurrentlySelected }) => {
       </header>
 
       <nav className="mb-6">
-        <ul className="flex flex-col gap-1">
+        <ul className="flex flex-col">
           <li
             className={`pl-6 py-1 font-semibold ${
               currentlySelected === "my quizzes" && "bg-[#FFEDD5]"

@@ -1,8 +1,7 @@
-import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { db } from "../firebase";
 import QuizCard from "./QuizCard";
+import { fetchQuizzes } from "../services";
 import { VscLoading } from "react-icons/vsc";
 
 const RecentlyTaken = () => {
@@ -11,20 +10,9 @@ const RecentlyTaken = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchQuiz = async () => {
-      const temp = await Promise.all(
-        recentQuizzes.map(async (recentQuiz) => {
-          const quizRef = doc(db, `quizzes/${recentQuiz}`);
-          const data = await getDoc(quizRef);
-          return data.data();
-        })
-      );
-
-      setRecents(temp);
-    };
-
-    fetchQuiz().then(() => {
+    fetchQuizzes(recentQuizzes).then((res) => {
       setIsLoading(false);
+      setRecents(res);
     });
   }, []);
 
