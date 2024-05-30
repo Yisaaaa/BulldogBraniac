@@ -18,6 +18,7 @@ const Sidebar = ({ currentlySelected, setCurrentlySelected }) => {
             }`}
           >
             <Link
+              to={"my-quizzes"}
               onClick={() => setCurrentlySelected("my quizzes")}
               className={` hover:text-primary duration-300 text-xl
                 ${

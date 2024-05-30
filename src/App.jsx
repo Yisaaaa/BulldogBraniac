@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import LandingPage from "./pages/LandingPage";
 import Signin from "./pages/Signin";
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useNavigate,
+  Navigate,
+  useMatch,
+} from "react-router-dom";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./firebase";
 import { setUser } from "./reducers/userSlice";
@@ -12,6 +18,7 @@ import MainPage from "./pages/MainPage";
 import HomePage from "./pages/HomePage";
 import Signup from "./pages/Signup";
 import Loading from "./components/Loading";
+import MyQuizzesPage from "./pages/MyQuizzesPage";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -19,6 +26,7 @@ const App = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
+  const matchSignInUrl = useMatch("/signin");
 
   useEffect(() => {
     const subscribe = onAuthStateChanged(auth, async (user) => {
@@ -27,7 +35,9 @@ const App = () => {
         const userRef = doc(db, `users/${user.uid}`);
         user = JSON.stringify((await getDoc(userRef)).data());
         dispatch(setUser(JSON.parse(user)));
-        navigate("/main");
+        if (matchSignInUrl) {
+          navigate("/main");
+        }
         setIsLoading(false);
       } else {
         console.log("no user");
@@ -53,6 +63,7 @@ const App = () => {
           element={user ? <MainPage /> : <Navigate replace to="/signin" />}
         >
           <Route path="home" element={<HomePage />} />
+          <Route path="my-quizzes" element={<MyQuizzesPage />} />
         </Route>
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />

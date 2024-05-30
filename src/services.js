@@ -9,7 +9,6 @@ const fetchQuizzes = async (quizIds) => {
       return data.data();
     })
   );
-  console.log(temp);
   return temp;
 };
 

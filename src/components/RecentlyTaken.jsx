@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import QuizCard from "./QuizCard";
 import { fetchQuizzes } from "../services";
 import { VscLoading } from "react-icons/vsc";
+import LoadingSmall from "./LoadingSmall";
 
 const RecentlyTaken = () => {
   let recentQuizzes = useSelector((state) => state.user.recentQuizzes);
@@ -17,11 +18,7 @@ const RecentlyTaken = () => {
   }, []);
 
   if (isLoading) {
-    return (
-      <div className="flex w-full h-48 items-center justify-center">
-        <VscLoading className="text-4xl font-bold animate-spin" />
-      </div>
-    );
+    return <LoadingSmall />;
   }
 
   console.log(recents);
