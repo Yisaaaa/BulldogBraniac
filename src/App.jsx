@@ -21,7 +21,8 @@ import Loading from "./components/Loading";
 import MyQuizzesPage from "./pages/MyQuizzesPage";
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const matchLandingPage = useMatch("/");
+  const [isLoading, setIsLoading] = useState(!matchLandingPage);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,9 +36,11 @@ const App = () => {
         const userRef = doc(db, `users/${user.uid}`);
         user = JSON.stringify((await getDoc(userRef)).data());
         dispatch(setUser(JSON.parse(user)));
+
         if (matchSignInUrl) {
           navigate("/main");
         }
+
         setIsLoading(false);
       } else {
         console.log("no user");

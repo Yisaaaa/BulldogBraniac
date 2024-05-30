@@ -13,9 +13,10 @@ const Signin = () => {
 
   useEffect(() => {
     if (user) {
+      console.log("user is signed in");
       navigate("/main");
     }
-  }, []);
+  }, [user]);
 
   const [userCredentials, setUserCredentials] = useState({
     email: "",
