@@ -22,7 +22,6 @@ const HomePage = () => {
           <RecentlyTaken />
         </div>
       </div>
-      <div className="absolute top-2 right-2 w-10 h-10 rounded-full bg-red-500"></div>
     </div>
   );
 };
