@@ -28,7 +28,7 @@ const PublicQuizzesPage = () => {
           ) : (
             <div className="flex flex-col gap-6">
               {quizzes.map((quiz) => (
-                <QuizCard key={quiz.id} userId={quiz.userId} quiz={quiz} />
+                <QuizCard key={quiz.id} userId={userId} quiz={quiz} />
               ))}
             </div>
           )}

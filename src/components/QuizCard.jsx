@@ -1,5 +1,5 @@
 import { doc, getDoc } from "firebase/firestore";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { useSelector } from "react-redux";
 import { yearColors, subjectColors } from "../colors";
@@ -7,12 +7,18 @@ import Tag from "./Tag";
 import { Link } from "react-router-dom";
 
 const QuizCard = ({ quiz, userId }) => {
-  let user = useSelector((state) => state.user);
+  const [quizUser, setQuizUser] = useState(null);
+
+  console.log(userId, quiz.userId);
 
   useEffect(() => {
     const checkIfSameUer = async () => {
       if (userId !== quiz.userId) {
-        user = await getDoc(doc(db, `users/${quiz.userId}`));
+        console.log("not by user");
+        const user = await getDoc(doc(db, `users/${quiz.userId}`));
+        setQuizUser(user.data());
+      } else {
+        setQuizUser(useSelector((state) => state.user));
       }
     };
 
@@ -30,14 +36,16 @@ const QuizCard = ({ quiz, userId }) => {
           <Tag color={subjectColors[quiz.subject]}>{quiz.subject}</Tag>
           <Tag color={yearColors[quiz.year]}>{quiz.year}</Tag>
         </div>
-        <div className="flex gap-2 items-end">
-          <img
-            className="w-7 rounded-full p-1 bg-[#818CF8]"
-            src={user.profileUrl}
-            alt=""
-          />
-          <p className="font-semibold  text-gray-500">{user.username}</p>
-        </div>
+        {quizUser && (
+          <div className="flex gap-2 items-end">
+            <img
+              className="w-7 rounded-full p-1 bg-[#818CF8]"
+              src={quizUser.profileUrl}
+              alt=""
+            />
+            <p className="font-semibold  text-gray-500">{quizUser.username}</p>
+          </div>
+        )}
       </div>
     </Link>
   );
