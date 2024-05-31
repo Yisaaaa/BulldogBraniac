@@ -3,11 +3,15 @@ import logo from "../assets/logo.svg";
 import { Link, useMatch } from "react-router-dom";
 import { useState } from "react";
 
+import CreateQuizDialog from "./ui/CreateQuizDialog";
+
 const Sidebar = () => {
   const matchHome = useMatch("/main/home");
   const matchMyQuizzes = useMatch("/main/my-quizzes");
   const matchPublicQuizzes = useMatch("/main/public-quizzes");
   const matchProfile = useMatch("/main/profile");
+
+  const [step, setStep] = useState(0);
 
   return (
     <div className="h-screen py-6 border-r-[2px] border-r-[#ddd] ">
@@ -74,9 +78,16 @@ const Sidebar = () => {
         </ul>
       </nav>
       <div className="flex px-6">
-        <button className="bg-primary rounded-full mx-auto w-full py-1 font-semibold text-white hover:bg-[#c2410c] transition-colors duration-300 text-lg">
+        {/* <button className="bg-primary rounded-full mx-auto w-full py-1 font-semibold text-white hover:bg-[#c2410c] transition-colors duration-300 text-lg">
+          Create quiz
+        </button> */}
+        <button
+          onClick={() => setStep(1)}
+          className="bg-primary rounded-full mx-auto w-full py-1 font-semibold text-white hover:bg-[#c2410c] transition-colors duration-300 text-lg"
+        >
           Create quiz
         </button>
+        <CreateQuizDialog step={step} setStep={setStep} />
       </div>
     </div>
   );
