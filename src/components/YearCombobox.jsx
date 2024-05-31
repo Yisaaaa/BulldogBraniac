@@ -67,8 +67,8 @@ export default function yearComboBox({ value, setValue }) {
                   className="font-semibold"
                   key={year.value}
                   value={year.value}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue);
+                  onSelect={() => {
+                    setValue(year.value === value ? "" : year.value);
                     setOpen(false);
                   }}
                 >

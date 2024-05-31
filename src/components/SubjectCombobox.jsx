@@ -76,8 +76,8 @@ export default function SubjectComboBox({ value, setValue }) {
                   className="font-semibold"
                   key={subject.value}
                   value={subject.value}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue);
+                  onSelect={() => {
+                    setValue(subject.value === value ? "" : subject.value);
                     setOpen(false);
                   }}
                 >
