@@ -3,7 +3,7 @@ import logo from "../assets/logo.svg";
 import { Link, useMatch } from "react-router-dom";
 import { useState } from "react";
 
-import CreateQuizDialog from "./ui/CreateQuizDialog";
+import CreateQuizDialog from "./CreateQuizDialog";
 
 const Sidebar = () => {
   const matchHome = useMatch("/main/home");

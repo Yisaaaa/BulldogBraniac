@@ -7,25 +7,10 @@ import Tag from "./Tag";
 import { Link } from "react-router-dom";
 import { VscLoading } from "react-icons/vsc";
 
-const QuizCard = ({ quiz, userId }) => {
-  const user = useSelector((state) => state.user);
-  const [quizUser, setQuizUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+const QuizCard = ({ quiz }) => {
+  let quizUser = quiz.user;
 
-  useEffect(() => {
-    const checkIfSameUer = async () => {
-      if (userId !== quiz.userId) {
-        const user = await getDoc(doc(db, `users/${quiz.userId}`));
-        setQuizUser(user.data());
-        setIsLoading(false);
-      } else {
-        setQuizUser(user);
-        setIsLoading(false);
-      }
-    };
-
-    checkIfSameUer();
-  }, []);
+  console.log(quiz);
 
   return (
     <Link className="hover:scale-105 transition-all duration-200">
@@ -38,22 +23,14 @@ const QuizCard = ({ quiz, userId }) => {
           <Tag color={subjectColors[quiz.subject]}>{quiz.subject}</Tag>
           <Tag color={yearColors[quiz.year]}>{quiz.year}</Tag>
         </div>
-        {isLoading ? (
-          <VscLoading className="text-base font-bold animate-spin" />
-        ) : (
-          quizUser && (
-            <div className="flex gap-2 items-end">
-              <img
-                className="w-7 rounded-full p-1 bg-[#818CF8]"
-                src={quizUser.profileUrl}
-                alt=""
-              />
-              <p className="font-semibold  text-gray-500">
-                {quizUser.username}
-              </p>
-            </div>
-          )
-        )}
+        <div className="flex gap-2 items-end">
+          <img
+            className="w-7 rounded-full p-1 bg-[#818CF8]"
+            src={quizUser.profileUrl}
+            alt=""
+          />
+          <p className="font-semibold  text-gray-500">{quizUser.username}</p>
+        </div>
       </div>
     </Link>
   );

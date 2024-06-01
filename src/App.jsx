@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./firebase";
+import { fetchPublicQuizzes, fetchQuizzes } from "./services";
 import { setUser } from "./reducers/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { doc, getDoc } from "firebase/firestore";
@@ -20,6 +21,7 @@ import Signup from "./pages/Signup";
 import Loading from "./components/Loading";
 import MyQuizzesPage from "./pages/MyQuizzesPage";
 import PublicQuizzesPage from "./pages/PublicQuizzesPage";
+import { setMyQuizzes, setPublicQuizzes } from "./reducers/quizSlice";
 
 const App = () => {
   const matchLandingPage = useMatch("/");
@@ -39,6 +41,19 @@ const App = () => {
         const userRef = doc(db, `users/${user.uid}`);
         user = JSON.stringify((await getDoc(userRef)).data());
         dispatch(setUser(JSON.parse(user)));
+
+        user = JSON.parse(user);
+
+        //Fetching the public quizzes
+        await fetchPublicQuizzes(user.id).then((res) => {
+          console.log(res);
+          dispatch(setPublicQuizzes(res));
+        });
+
+        // Fetching signed in user's quizzes
+        await fetchQuizzes(user.myQuizzes).then((res) => {
+          dispatch(setMyQuizzes(res));
+        });
 
         if (matchSignInUrl) {
           navigate("/main");
