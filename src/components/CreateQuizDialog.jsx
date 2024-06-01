@@ -35,29 +35,6 @@ function CreateQuizDialog({ step, setStep }) {
   console.log(user);
 
   useEffect(() => {
-    // writeQuizToDb({
-    //   userId: "lkaRxhcpkMS6nv0bCqJ0tjrbcc13",
-    //   title: "asdfsadf",
-    //   year: "First Year",
-    //   subject: "Computer",
-    //   content: [
-    //     {
-    //       question: "Which command is used to stop the Gemini process?",
-    //       options: ["gem stop", "docker stop gemini", "systemctl stop gemini"],
-    //       answer: "docker stop gemini",
-    //     },
-    //     {
-    //       question:
-    //         "What is the purpose of the docker container `diamond/gemini`?",
-    //       options: [
-    //         "Runs the Gemini application",
-    //         "Provides infrastructure for Gemini",
-    //         "Manages Gemini's database",
-    //       ],
-    //       answer: "Runs the Gemini application",
-    //     },
-    //   ],
-    // });
     if (step === 1) {
       setFirstStepIsOpen(true);
     } else if (step === 2) {
@@ -81,13 +58,21 @@ function CreateQuizDialog({ step, setStep }) {
     "i"
   ); // fragment locator
 
-  const handleUrl = () => {
+  const handleUrl = async () => {
     const url = webUrl;
     if (url.match(isUrlRegex)) {
       console.log("its a url");
       setWebUrl("");
       setError("");
-      generateQuizFromUrl(url, setGenerating, setError, setStep);
+      const content = await generateQuizFromUrl(
+        url,
+        setGenerating,
+        setError,
+        setStep
+      );
+      console.log(content);
+      await writeQuizToDb({ ...quizInfo, content }, user);
+      setGenerating(false);
     } else {
       setError("Please paste in a url!");
     }

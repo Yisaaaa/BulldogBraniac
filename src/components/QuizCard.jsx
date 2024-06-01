@@ -10,8 +10,6 @@ import { VscLoading } from "react-icons/vsc";
 const QuizCard = ({ quiz }) => {
   let quizUser = quiz.user;
 
-  console.log(quiz);
-
   return (
     <Link className="hover:scale-105 transition-all duration-200">
       <div

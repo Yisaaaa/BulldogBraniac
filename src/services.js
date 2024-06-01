@@ -1,4 +1,12 @@
-import { collection, doc, getDoc, getDocs, addDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  addDoc,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "./firebase";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
@@ -77,7 +85,7 @@ const generateQuizFromUrl = async (url, setLoading, setError, setStep) => {
   }
 };
 
-const writeQuizToDb = async (quiz) => {
+const writeQuizToDb = async (quiz, user, dispatch) => {
   // setDoc
   console.log("writing to db: ", quiz);
   try {
@@ -85,7 +93,13 @@ const writeQuizToDb = async (quiz) => {
       ...quiz,
     });
     console.log("Document written with ID: ", docRef.id);
-    console.log(docRef);
+
+    // Updating quiz id
+    await updateDoc(docRef, { id: docRef.id });
+
+    // Updating user myQuizzes
+    const userRef = doc(db, `users/${quiz.userId}`);
+    await updateDoc(userRef, { myQuizzes: [...user.myQuizzes, docRef.id] });
   } catch (e) {
     console.log("error saving data to db: ", e);
   }
