@@ -44,6 +44,12 @@ const App = () => {
 
         user = JSON.parse(user);
 
+        if (matchSignInUrl) {
+          navigate("/main");
+        }
+
+        setIsLoading(false);
+
         //Fetching the public quizzes
         await fetchPublicQuizzes(user.id).then((res) => {
           console.log(res);
@@ -54,12 +60,6 @@ const App = () => {
         await fetchQuizzes(user.myQuizzes).then((res) => {
           dispatch(setMyQuizzes(res));
         });
-
-        if (matchSignInUrl) {
-          navigate("/main");
-        }
-
-        setIsLoading(false);
       } else {
         console.log("no user");
         setIsLoading(false);

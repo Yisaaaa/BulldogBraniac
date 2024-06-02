@@ -12,9 +12,10 @@ import YearComboBox from "./YearCombobox";
 import SubjectComboBox from "./SubjectCombobox";
 import { generateQuizFromUrl, writeQuizToDb } from "../services";
 import LoadingSmall from "./LoadingSmall";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function CreateQuizDialog({ step, setStep }) {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [firstStepIsOpen, setFirstStepIsOpen] = useState(false);
   const [secondStepIsOpen, setSecondStepIsOpen] = useState(false);
@@ -71,7 +72,7 @@ function CreateQuizDialog({ step, setStep }) {
         setStep
       );
       console.log(content);
-      await writeQuizToDb({ ...quizInfo, content }, user);
+      const newQuiz = await writeQuizToDb({ ...quizInfo, content }, user);
       setGenerating(false);
     } else {
       setError("Please paste in a url!");

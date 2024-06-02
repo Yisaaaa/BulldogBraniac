@@ -5,13 +5,19 @@ export const quizSlice = createSlice({
   initialState: {
     myQuizzes: [],
     publicQuizzes: [],
+    myQuizzesLoading: true,
+    publicQuizzesLoading: true,
   },
   reducers: {
     setPublicQuizzes: (state, action) => {
-      return { ...state, publicQuizzes: action.payload };
+      return {
+        ...state,
+        publicQuizzes: action.payload,
+        publicQuizzesLoading: false,
+      };
     },
     setMyQuizzes: (state, action) => {
-      return { ...state, myQuizzes: action.payload };
+      return { ...state, myQuizzes: action.payload, myQuizzesLoading: false };
     },
   },
 });
