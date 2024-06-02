@@ -11,7 +11,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useState } from "react";
 import YearComboBox from "./YearCombobox";
 import SubjectComboBox from "./SubjectCombobox";
-import { generateQuiz, writeQuizToDb } from "../services";
+import {
+  generateQuiz,
+  generateQuizFromNotes,
+  generateQuizFromUrl,
+  writeQuizToDb,
+} from "../services";
 import LoadingSmall from "./LoadingSmall";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewQuiz } from "../reducers/quizSlice";
@@ -29,7 +34,6 @@ function CreateQuizDialog({ step, setStep }) {
   const [generating, setGenerating] = useState(false);
   const [quizInfo, setQuizInfo] = useState({
     userId: user.id,
-    user: user,
     title: "",
     year: "",
     subject: "",
@@ -37,8 +41,6 @@ function CreateQuizDialog({ step, setStep }) {
   });
 
   console.log(user);
-
-  console.log(notes);
 
   useEffect(() => {
     if (step === 1) {
@@ -73,9 +75,10 @@ function CreateQuizDialog({ step, setStep }) {
 
       setGenerating(true);
       try {
-        const content = await generateQuiz(url);
+        const content = await generateQuizFromUrl(url);
         console.log(content);
         const newQuiz = await writeQuizToDb({ ...quizInfo, content }, user);
+        newQuiz.user = user;
         dispatch(addNewQuiz(newQuiz));
         setStep(0);
         setGenerating(false);
@@ -93,6 +96,22 @@ function CreateQuizDialog({ step, setStep }) {
 
   const handleNotes = async () => {
     const notesCopy = notes;
+    console.log(notesCopy);
+
+    setGenerating(true);
+    try {
+      const content = await generateQuizFromNotes(notesCopy);
+      console.log(content);
+      const newQuiz = await writeQuizToDb({ ...quizInfo, content }, user);
+      newQuiz.user = user;
+      dispatch(addNewQuiz(newQuiz));
+      setNotes("");
+      setStep(0);
+    } catch (e) {
+      console.log(e);
+      setError("Error generating quiz");
+    }
+    setGenerating(false);
   };
 
   const handleFirstSubmit = (e) => {
@@ -298,37 +317,46 @@ function CreateQuizDialog({ step, setStep }) {
                 Create a quiz from notes
               </DialogTitle>
             </DialogHeader>
-            <div className="px-1 mb-3 max-h-96 ">
-              {error && (
-                <div className="bg-red-300 py-1 rounded-lg border-2 border-red-600 mb-4">
-                  <p className="text-lg text-center font-semibold text-red-500 ">
-                    {error}
-                  </p>
+            {generating ? (
+              <LoadingSmall />
+            ) : (
+              <>
+                <div className="px-1 mb-3 ">
+                  {error && (
+                    <div className="bg-red-300 py-1 rounded-lg border-2 border-red-600 mb-4">
+                      <p className="text-lg text-center font-semibold text-red-500 ">
+                        {error}
+                      </p>
+                    </div>
+                  )}
+
+                  <div className=" flex flex-col gap-2">
+                    <label
+                      className="pl-1 font-semibold text-lg"
+                      htmlFor="notes"
+                    >
+                      Paste in your notes
+                    </label>
+                    <Textarea
+                      className="border-[1px] border-[#aaa] rounded-md px-2 py-1 text-lg overflow-y-scroll max-h-80"
+                      id="notes"
+                      onChange={(e) => setNotes(e.target.value)}
+                      value={notes}
+                      placeholder="Paste your notes here..."
+                    />
+                  </div>
                 </div>
-              )}
 
-              <div className=" flex flex-col gap-2">
-                <label className="pl-1 font-semibold text-lg" htmlFor="notes">
-                  Paste in your notes
-                </label>
-                <Textarea
-                  className="border-[1px] border-[#aaa] rounded-md px-2 py-1 text-lg overflow-y-scroll max-h-80"
-                  id="notes"
-                  onChange={(e) => setNotes(e.target.value)}
-                  value={notes}
-                  placeholder="Paste your notes here..."
-                />
-              </div>
-            </div>
-
-            <DialogFooter>
-              <button
-                onClick={handleNotes}
-                className="bg-primary rounded-full py-1 font-semibold text-white hover:bg-[#c2410c] transition-colors duration-300 text-lg px-4"
-              >
-                Confirm
-              </button>
-            </DialogFooter>
+                <DialogFooter>
+                  <button
+                    onClick={handleNotes}
+                    className="bg-primary rounded-full py-1 font-semibold text-white hover:bg-[#c2410c] transition-colors duration-300 text-lg px-4"
+                  >
+                    Confirm
+                  </button>
+                </DialogFooter>
+              </>
+            )}
           </DialogContent>
         </Dialog>
       );
