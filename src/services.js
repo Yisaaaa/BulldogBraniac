@@ -100,4 +100,4 @@ const writeQuizToDb = async (quiz, user, dispatch) => {
   }
 };
 
-export { fetchQuizzes, fetchPublicQuizzes, generateQuizFromUrl, writeQuizToDb };
+export { fetchQuizzes, fetchPublicQuizzes, generateQuiz, writeQuizToDb };
