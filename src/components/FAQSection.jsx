@@ -8,10 +8,10 @@ import {
 
 const FAQSection = () => {
   return (
-    <div className="bg-[#fb923c] text-white pb-48">
+    <div id="faq" className="bg-[#fb923c] text-white pb-48">
       <main className="max-w-screen-xl mx-auto py-5 px-14 h-full relative">
         <h2 className="text-4xl font-extrabold mb-24">FAQs</h2>
-        <div id="faq" className="w-[60%] mx-auto">
+        <div className="w-[60%] mx-auto">
           <Accordion type="single" collapsible>
             <AccordionItem value="item-1">
               <AccordionTrigger className="text-2xl">

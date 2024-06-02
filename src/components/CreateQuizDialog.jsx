@@ -7,6 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useState } from "react";
 import YearComboBox from "./YearCombobox";
 import SubjectComboBox from "./SubjectCombobox";
@@ -36,6 +37,8 @@ function CreateQuizDialog({ step, setStep }) {
   });
 
   console.log(user);
+
+  console.log(notes);
 
   useEffect(() => {
     if (step === 1) {
@@ -86,6 +89,10 @@ function CreateQuizDialog({ step, setStep }) {
       setError("Please paste in a url!");
     }
     // gemini(url)
+  };
+
+  const handleNotes = async () => {
+    const notesCopy = notes;
   };
 
   const handleFirstSubmit = (e) => {
@@ -288,10 +295,10 @@ function CreateQuizDialog({ step, setStep }) {
           <DialogContent className="bg-white max-w-xl">
             <DialogHeader className="mb-4">
               <DialogTitle className="text-3xl">
-                Where is your quiz coming from?
+                Create a quiz from notes
               </DialogTitle>
             </DialogHeader>
-            <div className="px-1 mb-3">
+            <div className="px-1 mb-3 max-h-96 ">
               {error && (
                 <div className="bg-red-300 py-1 rounded-lg border-2 border-red-600 mb-4">
                   <p className="text-lg text-center font-semibold text-red-500 ">
@@ -300,8 +307,28 @@ function CreateQuizDialog({ step, setStep }) {
                 </div>
               )}
 
-              <div>Notes</div>
+              <div className=" flex flex-col gap-2">
+                <label className="pl-1 font-semibold text-lg" htmlFor="notes">
+                  Paste in your notes
+                </label>
+                <Textarea
+                  className="border-[1px] border-[#aaa] rounded-md px-2 py-1 text-lg overflow-y-scroll max-h-80"
+                  id="notes"
+                  onChange={(e) => setNotes(e.target.value)}
+                  value={notes}
+                  placeholder="Paste your notes here..."
+                />
+              </div>
             </div>
+
+            <DialogFooter>
+              <button
+                onClick={handleNotes}
+                className="bg-primary rounded-full py-1 font-semibold text-white hover:bg-[#c2410c] transition-colors duration-300 text-lg px-4"
+              >
+                Confirm
+              </button>
+            </DialogFooter>
           </DialogContent>
         </Dialog>
       );
