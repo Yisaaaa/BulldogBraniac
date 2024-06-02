@@ -13,6 +13,7 @@ import SubjectComboBox from "./SubjectCombobox";
 import { generateQuizFromUrl, writeQuizToDb } from "../services";
 import LoadingSmall from "./LoadingSmall";
 import { useDispatch, useSelector } from "react-redux";
+import { addNewQuiz } from "../reducers/quizSlice";
 
 function CreateQuizDialog({ step, setStep }) {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function CreateQuizDialog({ step, setStep }) {
   const [generating, setGenerating] = useState(false);
   const [quizInfo, setQuizInfo] = useState({
     userId: user.id,
+    user: user,
     title: "",
     year: "",
     subject: "",
@@ -65,15 +67,26 @@ function CreateQuizDialog({ step, setStep }) {
       console.log("its a url");
       setWebUrl("");
       setError("");
-      const content = await generateQuizFromUrl(
-        url,
-        setGenerating,
-        setError,
-        setStep
-      );
-      console.log(content);
-      const newQuiz = await writeQuizToDb({ ...quizInfo, content }, user);
-      setGenerating(false);
+
+      setGenerating(true);
+      try {
+        const content = await generateQuizFromUrl(
+          url,
+          setGenerating,
+          setError,
+          setStep
+        );
+        console.log(content);
+        const newQuiz = await writeQuizToDb({ ...quizInfo, content }, user);
+        dispatch(addNewQuiz(newQuiz));
+        setStep(0);
+        setGenerating(false);
+      } catch (e) {
+        setError("Error generating quiz");
+        setGenerating(false);
+        console.log("Error generating quiz");
+        console.log(e);
+      }
     } else {
       setError("Please paste in a url!");
     }
