@@ -7,26 +7,20 @@ import LoadingSmall from "./LoadingSmall";
 
 const RecentlyTaken = () => {
   const user = useSelector((state) => state.user);
-  const [recents, setRecents] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { recentQuizzes, recentQuizzesLoading } = useSelector(
+    (state) => state.quizzes
+  );
 
-  useEffect(() => {
-    fetchQuizzes(user.recentQuizzes).then((res) => {
-      setIsLoading(false);
-      setRecents(res);
-    });
-  }, []);
-
-  if (isLoading) {
+  if (recentQuizzesLoading) {
     return <LoadingSmall />;
   }
 
   return (
     <div>
       <p className="text-2xl font-medium mb-8">Recently Taken</p>
-      {recents.length !== 0 ? (
+      {recentQuizzes.length !== 0 ? (
         <div className="flex flex-col gap-6">
-          {recents.map((quiz) => {
+          {recentQuizzes.map((quiz) => {
             return <QuizCard key={quiz.id} userId={user.id} quiz={quiz} />;
           })}
         </div>

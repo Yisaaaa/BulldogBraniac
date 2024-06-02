@@ -21,7 +21,11 @@ import Signup from "./pages/Signup";
 import Loading from "./components/Loading";
 import MyQuizzesPage from "./pages/MyQuizzesPage";
 import PublicQuizzesPage from "./pages/PublicQuizzesPage";
-import { setMyQuizzes, setPublicQuizzes } from "./reducers/quizSlice";
+import {
+  setMyQuizzes,
+  setPublicQuizzes,
+  setRecentQuizzes,
+} from "./reducers/quizSlice";
 
 const App = () => {
   const matchLandingPage = useMatch("/");
@@ -33,8 +37,6 @@ const App = () => {
   const matchSignInUrl = useMatch("/signin");
 
   useEffect(() => {
-    // signOut(auth);
-
     const subscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         console.log("user logged in");
@@ -50,6 +52,11 @@ const App = () => {
 
         setIsLoading(false);
 
+        // Fetching recent quizzes
+        await fetchQuizzes(user.recentQuizzes).then((res) => {
+          dispatch(setRecentQuizzes(res));
+        });
+
         //Fetching the public quizzes
         await fetchPublicQuizzes(user.id).then((res) => {
           console.log(res);
@@ -64,8 +71,6 @@ const App = () => {
         console.log("no user");
         setIsLoading(false);
       }
-
-      setIsLoading(false);
 
       return subscribe;
     });

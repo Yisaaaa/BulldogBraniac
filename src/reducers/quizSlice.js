@@ -5,8 +5,10 @@ export const quizSlice = createSlice({
   initialState: {
     myQuizzes: [],
     publicQuizzes: [],
+    recentQuizzes: [],
     myQuizzesLoading: true,
     publicQuizzesLoading: true,
+    recentQuizzesLoading: true,
   },
   reducers: {
     setPublicQuizzes: (state, action) => {
@@ -19,12 +21,20 @@ export const quizSlice = createSlice({
     setMyQuizzes: (state, action) => {
       return { ...state, myQuizzes: action.payload, myQuizzesLoading: false };
     },
+    setRecentQuizzes: (state, action) => {
+      return {
+        ...state,
+        recentQuizzes: action.payload,
+        recentQuizzesLoading: false,
+      };
+    },
     addNewQuiz: (state, action) => {
       return { ...state, myQuizzes: [...state.myQuizzes, action.payload] };
     },
   },
 });
 
-export const { setPublicQuizzes, setMyQuizzes, addNewQuiz } = quizSlice.actions;
+export const { setPublicQuizzes, setMyQuizzes, setRecentQuizzes, addNewQuiz } =
+  quizSlice.actions;
 
 export default quizSlice.reducer;
