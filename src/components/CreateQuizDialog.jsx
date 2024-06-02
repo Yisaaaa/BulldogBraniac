@@ -10,7 +10,7 @@ import {
 import { useEffect, useState } from "react";
 import YearComboBox from "./YearCombobox";
 import SubjectComboBox from "./SubjectCombobox";
-import { generateQuizFromUrl, writeQuizToDb } from "../services";
+import { generateQuiz, writeQuizToDb } from "../services";
 import LoadingSmall from "./LoadingSmall";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewQuiz } from "../reducers/quizSlice";
@@ -70,12 +70,7 @@ function CreateQuizDialog({ step, setStep }) {
 
       setGenerating(true);
       try {
-        const content = await generateQuizFromUrl(
-          url,
-          setGenerating,
-          setError,
-          setStep
-        );
+        const content = await generateQuiz(url);
         console.log(content);
         const newQuiz = await writeQuizToDb({ ...quizInfo, content }, user);
         dispatch(addNewQuiz(newQuiz));

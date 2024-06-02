@@ -48,7 +48,7 @@ const fetchPublicQuizzes = async (userId) => {
   return temp;
 };
 
-const generateQuizFromUrl = async (url, setError, setStep) => {
+const generateQuiz = async (url) => {
   // Access your API key (see "Set up your API key" above)
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_KEY);
 
