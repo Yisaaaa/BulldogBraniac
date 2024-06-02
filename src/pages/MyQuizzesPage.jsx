@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import QuizCard from "../components/QuizCard";
 import { useSelector } from "react-redux";
-import Loading from "../components/Loading";
+import LoadingSmall from "../components/LoadingSmall";
 
 const MyQuizzesPage = () => {
   const user = useSelector((state) => state.user);
   const { myQuizzes, myQuizzesLoading } = useSelector((state) => state.quizzes);
 
   if (myQuizzesLoading) {
-    return <Loading />;
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <LoadingSmall />
+      </div>
+    );
   }
 
   return (

@@ -3,6 +3,7 @@ import { fetchPublicQuizzes } from "../services";
 import QuizCard from "../components/QuizCard";
 import { useSelector } from "react-redux";
 import Loading from "../components/Loading";
+import LoadingSmall from "../components/LoadingSmall";
 
 const PublicQuizzesPage = () => {
   const userId = useSelector((state) => state.user.id);
@@ -11,7 +12,7 @@ const PublicQuizzesPage = () => {
   );
 
   if (publicQuizzesLoading) {
-    return <Loading />;
+    return <LoadingSmall />;
   }
 
   return (

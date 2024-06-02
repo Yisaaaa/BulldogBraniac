@@ -3,7 +3,7 @@ import { VscLoading } from "react-icons/vsc";
 
 const LoadingSmall = () => {
   return (
-    <div className="flex w-full h-48 items-center justify-center">
+    <div className="flex w-full h-full items-center justify-center">
       <VscLoading className="text-4xl font-bold animate-spin" />
     </div>
   );
