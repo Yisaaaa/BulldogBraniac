@@ -101,7 +101,7 @@ const writeQuizToDb = async (quiz, user, dispatch) => {
     const userRef = doc(db, `users/${quiz.userId}`);
     await updateDoc(userRef, { myQuizzes: [...user.myQuizzes, docRef.id] });
 
-    return await getDoc(db, docRef);
+    return (await getDoc(doc(db, `quizzes/${docRef.id}`))).data();
   } catch (e) {
     console.log("error saving data to db: ", e);
   }
