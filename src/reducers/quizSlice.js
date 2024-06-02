@@ -19,9 +19,12 @@ export const quizSlice = createSlice({
     setMyQuizzes: (state, action) => {
       return { ...state, myQuizzes: action.payload, myQuizzesLoading: false };
     },
+    addNewQuiz: (state, action) => {
+      return { ...state, myQuizzes: [...state.myQuizzes, action.payload] };
+    },
   },
 });
 
-export const { setPublicQuizzes, setMyQuizzes } = quizSlice.actions;
+export const { setPublicQuizzes, setMyQuizzes, addNewQuiz } = quizSlice.actions;
 
 export default quizSlice.reducer;
