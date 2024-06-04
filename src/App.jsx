@@ -26,6 +26,9 @@ import {
   setPublicQuizzes,
   setRecentQuizzes,
 } from "./reducers/quizSlice";
+import QuizPage from "./pages/QuizPage";
+import LoadingSmall from "./components/LoadingSmall";
+import QuizContent from "./components/QuizContent";
 
 const App = () => {
   const matchLandingPage = useMatch("/");
@@ -34,6 +37,10 @@ const App = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
+  (state) => state.quizzes;
+
+  const { publicQuizzes, myQuizzes, publicQuizzesLoading, myQuizzesLoading } =
+    useSelector((state) => state.quizzes);
   const matchSignInUrl = useMatch("/signin");
 
   useEffect(() => {
@@ -90,7 +97,23 @@ const App = () => {
         >
           <Route path="home" element={<HomePage />} />
           <Route path="public-quizzes" element={<PublicQuizzesPage />} />
+          <Route
+            path="public-quizzes/:id/*"
+            element={
+              publicQuizzesLoading ? (
+                <LoadingSmall />
+              ) : (
+                <QuizPage quizzes={publicQuizzes} />
+              )
+            }
+          >
+            <Route path="content" element={<QuizContent />} />
+          </Route>
           <Route path="my-quizzes" element={<MyQuizzesPage />} />
+          <Route
+            path="my-quizzes/:id"
+            element={myQuizzesLoading ? <LoadingSmall /> : <></>}
+          ></Route>
         </Route>
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />

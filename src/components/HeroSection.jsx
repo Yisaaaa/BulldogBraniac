@@ -3,7 +3,6 @@ import PrimaryLinkButton from "./PrimaryLinkButton";
 import SecondaryLinkButton from "./SecondaryLinkButton";
 import hero from "../assets/hero_img.svg";
 import { FaArrowDownLong } from "react-icons/fa6";
-import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (

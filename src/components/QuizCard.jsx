@@ -1,17 +1,19 @@
 import { doc, getDoc } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { db } from "../firebase";
 import { useSelector } from "react-redux";
 import { yearColors, subjectColors } from "../colors";
 import Tag from "./Tag";
 import { Link } from "react-router-dom";
-import { VscLoading } from "react-icons/vsc";
 
 const QuizCard = ({ quiz }) => {
   let quizUser = quiz.user;
 
   return (
-    <Link className="hover:scale-105 transition-all duration-200">
+    <Link
+      to={`${quiz.id}/content`}
+      className="hover:scale-105 transition-all duration-200"
+    >
       <div
         style={{ borderRightColor: subjectColors[quiz.subject] }}
         className={`border-r-[68px] rounded-lg bg-white active:bg-gray-200 transition-colors duration-200 px-4 py-4 drop-shadow-lg`}
