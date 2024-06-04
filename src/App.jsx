@@ -111,9 +111,17 @@ const App = () => {
           </Route>
           <Route path="my-quizzes" element={<MyQuizzesPage />} />
           <Route
-            path="my-quizzes/:id"
-            element={myQuizzesLoading ? <LoadingSmall /> : <></>}
-          ></Route>
+            path="my-quizzes/:id/*"
+            element={
+              myQuizzesLoading ? (
+                <LoadingSmall />
+              ) : (
+                <QuizPage quizzes={myQuizzes} />
+              )
+            }
+          >
+            <Route path="content" element={<QuizContent />} />
+          </Route>
         </Route>
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
