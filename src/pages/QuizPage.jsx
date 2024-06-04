@@ -25,7 +25,10 @@ const QuizPage = ({ quizzes }) => {
         <QuizInfoHeader quiz={quiz} />
         <div className="flex justify-between mb-2 pr-10">
           <p className="text-lg font-semibold">
-            Current Score: {user.quizzesTaken[quiz.id]}
+            Current Score:{" "}
+            {user.quizzesTaken[quiz.id]
+              ? user.quizzesTaken[quiz.id]
+              : "quiz not taken yet"}
           </p>
           <PrimaryLinkButton className={"py-1 leading-none"}>
             Take Quiz
