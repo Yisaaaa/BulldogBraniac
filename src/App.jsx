@@ -123,6 +123,7 @@ const App = () => {
             }
           >
             <Route path="content" element={<QuizContent />} />
+            <Route path="leaderboard" element={<QuizLeaderboard />} />
           </Route>
         </Route>
         <Route path="/signin" element={<Signin />} />

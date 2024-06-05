@@ -1,5 +1,5 @@
 import React from "react";
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { FaCrown, FaMedal } from "react-icons/fa";
 
 const QuizLeaderboard = () => {
@@ -9,8 +9,7 @@ const QuizLeaderboard = () => {
 
   const leaderboardComponent = [];
 
-  for (let i = 0; i < leaderboard.length; i++) {
-    const row = leaderboard[i];
+  leaderboard.forEach((row, i) => {
     let rankingIcon;
 
     if (i === 0) {
@@ -54,15 +53,22 @@ const QuizLeaderboard = () => {
         </p>
       </div>
     );
-  }
+  });
+
+  console.log(leaderboard, leaderboardComponent);
 
   return (
     <>
       <div className="flex gap-4 w-[65%] mx-auto">
-        <button className="text-lg font-semibold mb-[4px]">Content</button>
-        <button className={`border-b-4 border-b-primary text-lg font-semibold`}>
+        <Link to={"../content"} className="text-lg font-semibold mb-[4px]">
+          Content
+        </Link>
+        <Link
+          to={""}
+          className={`border-b-4 border-b-primary text-lg font-semibold`}
+        >
           Leaderboard
-        </button>
+        </Link>
       </div>
       <div className="w-full h-[2px] bg-[#ccc] mb-4"></div>
       <div className="w-[46%] h-[65%] mx-auto overflow-scroll scroll-smooth bg-white drop-shadow-xl rounded-lg border-2 border-[#ccc]">
@@ -71,7 +77,7 @@ const QuizLeaderboard = () => {
           <p className="pl-14">Username</p>
           <p className="justify-self-end mr-3">Score</p>
         </div>
-        <div>{leaderboardComponent}</div>
+        <div>{leaderboardComponent.length ? leaderboardComponent : ""}</div>
       </div>
     </>
   );

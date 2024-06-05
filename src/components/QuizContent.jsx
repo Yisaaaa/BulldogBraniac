@@ -1,5 +1,5 @@
 import React from "react";
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import QnA from "./QnA";
 import { User } from "lucide-react";
 import { useSelector } from "react-redux";
@@ -11,10 +11,15 @@ const QuizContent = () => {
   return (
     <>
       <div className="flex gap-4 w-[65%] mx-auto">
-        <button className={`border-b-4 border-b-primary text-lg font-semibold`}>
+        <Link
+          to={""}
+          className={`border-b-4 border-b-primary text-lg font-semibold`}
+        >
           Content
-        </button>
-        <button className="text-lg font-semibold mb-[4px]">Leaderboard</button>
+        </Link>
+        <Link to={"../leaderboard"} className="text-lg font-semibold mb-[4px]">
+          Leaderboard
+        </Link>
       </div>
       <div className="w-full h-[2px] bg-[#ccc] mb-10"></div>
       <div className="w-[65%] max-h-[65%] mx-auto overflow-scroll scroll-smooth">
