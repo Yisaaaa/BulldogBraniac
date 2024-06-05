@@ -10,6 +10,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useSelector } from "react-redux";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -20,14 +22,14 @@ const MainPage = () => {
   useEffect(() => {
     // navigate("home");
     if (match) {
-      navigate("home");
+      navigate("overview");
     }
   }, []);
 
   return (
     <div className="bg-[#FFFCF9] grid grid-cols-[18rem_1fr] h-screen overflow-hidden">
       <Sidebar />
-      <Outlet />\
+      <Outlet />
       <DropdownMenu className="">
         <DropdownMenuTrigger className="absolute top-4 right-6 focus-visible:outline-none">
           <img
@@ -42,24 +44,24 @@ const MainPage = () => {
           <DropdownMenuSeparator className="" />
           <div className="hover:bg-orange-100 transition-colors duration-300">
             <DropdownMenuItem className="text-base ">
-              <Link className="">Homepage</Link>
+              <Link to={"/#hero"}>Homepage</Link>
             </DropdownMenuItem>
           </div>
 
           <div className="hover:bg-orange-100 transition-colors duration-300">
             <DropdownMenuItem className="text-base">
-              <Link>FAQ</Link>
+              <Link to={"/#faq"}>FAQ</Link>
             </DropdownMenuItem>
           </div>
           <div className="hover:bg-orange-100 transition-colors duration-300">
             <DropdownMenuItem className="text-base mb-2">
-              <Link>About us</Link>
+              <Link to={"/#aboutus"}>About us</Link>
             </DropdownMenuItem>
           </div>
           <DropdownMenuSeparator className="" />
           <div className="hover:bg-orange-100 transition-colors duration-300">
             <DropdownMenuItem className="text-base">
-              <button>Logout</button>
+              <button onClick={() => signOut(auth)}>Logout</button>
             </DropdownMenuItem>
           </div>
         </DropdownMenuContent>
