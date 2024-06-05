@@ -15,7 +15,7 @@ const MainPage = () => {
   }, []);
 
   return (
-    <div className="bg-[#FFF7ED] grid grid-cols-[18rem_1fr] h-screen overflow-hidden">
+    <div className="bg-[#FFFCF9] grid grid-cols-[18rem_1fr] h-screen overflow-hidden">
       <Sidebar />
       <Outlet />
       <div className="absolute top-2 right-2 w-10 h-10 rounded-full bg-red-500"></div>

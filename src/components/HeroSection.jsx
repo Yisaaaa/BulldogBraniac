@@ -19,7 +19,7 @@ const HeroSection = () => {
               Study <span className="text-primary">smarter</span>, <br />
               not harder
             </h1>
-            <p className="text-xl leading-relaxed mb-12 pr-20">
+            <p className="text-xl font-medium leading-relaxed mb-12 pr-20">
               Our interactive quiz reviews make learning easy and effective.
               Test your knowledge, see your progress, and excel in your studies.
             </p>
