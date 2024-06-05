@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 
 const Signin = () => {
   const user = useSelector((state) => state.user);
+  console.log(user);
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -9,14 +9,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
+import { setUser } from "../reducers/userSlice";
 
 const MainPage = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
-
+  const dispatch = useDispatch();
   const match = useMatch("/main");
 
   useEffect(() => {
@@ -25,6 +26,13 @@ const MainPage = () => {
       navigate("overview");
     }
   }, []);
+
+  const handleSignOut = () => {
+    console.log("setting user");
+    dispatch(setUser(null));
+    signOut(auth);
+    navigate("/signin");
+  };
 
   return (
     <div className="bg-[#FFFCF9] grid grid-cols-[18rem_1fr] h-screen overflow-hidden">
@@ -61,7 +69,7 @@ const MainPage = () => {
           <DropdownMenuSeparator className="" />
           <div className="hover:bg-orange-100 transition-colors duration-300">
             <DropdownMenuItem className="text-base">
-              <button onClick={() => signOut(auth)}>Logout</button>
+              <button onClick={handleSignOut}>Logout</button>
             </DropdownMenuItem>
           </div>
         </DropdownMenuContent>

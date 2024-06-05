@@ -38,7 +38,8 @@ const App = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
-  (state) => state.quizzes;
+
+  console.log("user", user);
 
   const { publicQuizzes, myQuizzes, publicQuizzesLoading, myQuizzesLoading } =
     useSelector((state) => state.quizzes);
