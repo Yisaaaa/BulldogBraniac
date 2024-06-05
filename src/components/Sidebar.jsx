@@ -23,13 +23,25 @@ const Sidebar = () => {
       <nav className="mb-6">
         <ul className="flex flex-col">
           <li
+            className={`pl-6 py-1 font-semibold ${matchHome && "bg-[#FFEDD5]"}`}
+          >
+            <Link
+              to={"home"}
+              className={` hover:text-primary duration-200 text-xl
+                ${matchHome ? "bg-[#FFEDD5] text-primary" : ""}
+              `}
+            >
+              Home
+            </Link>
+          </li>
+          <li
             className={`pl-6 py-1 font-semibold ${
               matchMyQuizzes && "bg-[#FFEDD5]"
             }`}
           >
             <Link
               to={"my-quizzes"}
-              className={` hover:text-primary duration-300 text-xl
+              className={` hover:text-primary duration-200 text-xl
                 ${matchMyQuizzes ? "bg-[#FFEDD5] text-primary" : ""}
               `}
             >
@@ -43,23 +55,11 @@ const Sidebar = () => {
           >
             <Link
               to={"public-quizzes"}
-              className={` hover:text-primary duration-300 text-xl
+              className={` hover:text-primary duration-200 text-xl
                 ${matchPublicQuizzes ? "bg-[#FFEDD5] text-primary" : ""}
               `}
             >
               Public Quizzes
-            </Link>
-          </li>
-          <li
-            className={`pl-6 py-1 font-semibold ${matchHome && "bg-[#FFEDD5]"}`}
-          >
-            <Link
-              to={"home"}
-              className={` hover:text-primary duration-300 text-xl
-                ${matchHome ? "bg-[#FFEDD5] text-primary" : ""}
-              `}
-            >
-              Home
             </Link>
           </li>
           <li
