@@ -23,8 +23,8 @@ const QuizPage = ({ quizzes }) => {
     <div className="overflow-y-hidden h-screen">
       <div className="w-[65%] mx-auto pt-16 overflow-y-scroll no-scrollbar scroll-smooth">
         <QuizInfoHeader quiz={quiz} />
-        <div className="flex justify-between mb-2 pr-10">
-          <p className="text-lg font-semibold">
+        <div className="flex justify-between mb-2 ">
+          <p className="text-xl font-semibold">
             Current Score:{" "}
             {user.quizzesTaken[quiz.id]
               ? user.quizzesTaken[quiz.id]

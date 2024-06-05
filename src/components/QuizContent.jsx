@@ -11,10 +11,10 @@ const QuizContent = () => {
   return (
     <>
       <div className="flex gap-4 w-[65%] mx-auto">
-        <button className={`border-b-[2px] border-b-primary font-semibold`}>
+        <button className={`border-b-4 border-b-primary text-lg font-semibold`}>
           Content
         </button>
-        <button className="font-semibold">Leaderboard</button>
+        <button className="text-lg font-semibold mb-[4px]">Leaderboard</button>
       </div>
       <div className="w-full h-[2px] bg-[#ccc] mb-10"></div>
       <div className="w-[65%] max-h-[65%] mx-auto overflow-scroll scroll-smooth">
