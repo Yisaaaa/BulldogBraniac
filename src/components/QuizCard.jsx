@@ -12,11 +12,11 @@ const QuizCard = ({ quiz }) => {
   return (
     <Link
       to={`${quiz.id}/content`}
-      className="hover:scale-105 transition-all duration-200"
+      className="hover:scale-105 transition-all duration-200 border-2 border-[#ddd] rounded-lg"
     >
       <div
         style={{ borderRightColor: subjectColors[quiz.subject] }}
-        className={`border-r-[68px] rounded-lg bg-white active:bg-gray-200 transition-colors duration-200 px-4 py-4 drop-shadow-lg`}
+        className={`border-r-[68px] rounded-lg bg-white active:bg-gray-200 transition-colors duration-200 px-4 py-4 drop-shadow-xl`}
       >
         <p className="text-xl font-semibold mb-5">{quiz.title}</p>
         <div className="flex gap-2 mb-6">
