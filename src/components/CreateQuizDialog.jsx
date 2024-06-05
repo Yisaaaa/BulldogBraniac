@@ -38,6 +38,7 @@ function CreateQuizDialog({ step, setStep }) {
     year: "",
     subject: "",
     content: [],
+    leaderboard: [],
   });
 
   console.log(user);
