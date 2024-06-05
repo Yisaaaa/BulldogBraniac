@@ -6,7 +6,7 @@ import { useState } from "react";
 import CreateQuizDialog from "./CreateQuizDialog";
 
 const Sidebar = () => {
-  const matchHome = useMatch("/main/home");
+  const matchOverview = useMatch("/main/overview");
   const matchMyQuizzes = useMatch("/main/my-quizzes");
   const matchPublicQuizzes = useMatch("/main/public-quizzes");
   const matchProfile = useMatch("/main/profile");
@@ -23,46 +23,48 @@ const Sidebar = () => {
       <nav className="mb-6">
         <ul className="flex flex-col">
           <li
-            className={`pl-6 py-1 font-semibold ${matchHome && "bg-[#FFEDD5]"}`}
+            className={`hover:text-primary  hover:bg-orange-50 duration-300 pl-6 py-2 font-semibold ${
+              matchOverview && "bg-[#FFEDD5]"
+            }`}
           >
             <Link
-              to={"home"}
-              className={` hover:text-primary duration-200 text-xl
-                ${matchHome ? "bg-[#FFEDD5] text-primary" : ""}
+              to={"overview"}
+              className={`  duration-200 text-xl
+                ${matchOverview ? " text-primary" : ""}
               `}
             >
-              Home
+              Overview
             </Link>
           </li>
           <li
-            className={`pl-6 py-1 font-semibold ${
+            className={`hover:bg-orange-50 hover:text-primary  duration-300 pl-6 py-2 font-semibold ${
               matchMyQuizzes && "bg-[#FFEDD5]"
             }`}
           >
             <Link
               to={"my-quizzes"}
-              className={` hover:text-primary duration-200 text-xl
-                ${matchMyQuizzes ? "bg-[#FFEDD5] text-primary" : ""}
+              className={` duration-200 text-xl
+                ${matchMyQuizzes ? " text-primary" : ""}
               `}
             >
               My Quizzes
             </Link>
           </li>
           <li
-            className={`pl-6 py-1 font-semibold ${
+            className={`hover:text-primary  hover:bg-orange-50 duration-300 pl-6 py-2 font-semibold ${
               matchPublicQuizzes && "bg-[#FFEDD5]"
             }`}
           >
             <Link
               to={"public-quizzes"}
-              className={` hover:text-primary duration-200 text-xl
-                ${matchPublicQuizzes ? "bg-[#FFEDD5] text-primary" : ""}
+              className={` duration-200 text-xl
+                ${matchPublicQuizzes ? " text-primary" : ""}
               `}
             >
               Public Quizzes
             </Link>
           </li>
-          <li
+          {/* <li
             className={`pl-6 py-1 font-semibold ${
               matchProfile && "bg-[#FFEDD5]"
             }`}
@@ -74,7 +76,7 @@ const Sidebar = () => {
             >
               Profile
             </Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
       <div className="flex px-6">

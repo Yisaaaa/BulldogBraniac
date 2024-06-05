@@ -96,7 +96,7 @@ const App = () => {
           path="/main/*"
           element={user ? <MainPage /> : <Navigate replace to="/signin" />}
         >
-          <Route path="home" element={<HomePage />} />
+          <Route path="overview" element={<HomePage />} />
           <Route path="public-quizzes" element={<PublicQuizzesPage />} />
           <Route
             path="public-quizzes/:id/*"
