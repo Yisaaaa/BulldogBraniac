@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import LoadingSmall from "../components/LoadingSmall";
@@ -26,6 +26,8 @@ const AnsweringQuizPage = () => {
   const [currentItem, setCurrentItem] = useState(0);
   const [answer, setAnswer] = useState("");
   const [quizDone, setQuizDone] = useState(false);
+
+  const score = useRef(0);
 
   useEffect(() => {
     setCurrentItem((prev) => prev + 1);
@@ -78,6 +80,10 @@ const AnsweringQuizPage = () => {
                     if (!answer) {
                       setAnswer(option);
                     }
+
+                    if (option === currentQuestion.answer) {
+                      score.current += 1;
+                    }
                   }}
                   key={option}
                   className={`${style} border-2 border-[#ccc] rounded-lg w-full py-6 px-8 text-center text-lg`}
@@ -97,7 +103,12 @@ const AnsweringQuizPage = () => {
           </div>
         </>
       ) : (
-        <QuizDone />
+        <QuizDone
+          score={score.current}
+          questions={questions}
+          from={from}
+          id={id}
+        />
       )}
     </div>
   );
