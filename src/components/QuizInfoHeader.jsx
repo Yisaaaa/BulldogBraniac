@@ -2,10 +2,10 @@ import Tag from "./Tag";
 import React from "react";
 import { yearColors, subjectColors } from "../colors";
 
-const QuizInfoHeader = ({ quiz }) => {
-  console.log(quiz);
+const QuizInfoHeader = ({ quiz, className }) => {
+  // console.log(quiz);
   return (
-    <div className="mb-4">
+    <div className={`mb-4 ${className}`}>
       <p className="text-3xl font-semibold mb-4">{quiz.title}</p>
       <div className="flex gap-2 mb-4">
         <Tag color={subjectColors[quiz.subject]}>{quiz.subject}</Tag>

@@ -30,6 +30,7 @@ import QuizPage from "./pages/QuizPage";
 import LoadingSmall from "./components/LoadingSmall";
 import QuizContent from "./components/QuizContent";
 import QuizLeaderboard from "./components/QuizLeaderboard";
+import AnsweringQuizPage from "./pages/AnsweringQuizPage";
 
 const App = () => {
   const matchLandingPage = useMatch("/");
@@ -126,6 +127,8 @@ const App = () => {
             <Route path="content" element={<QuizContent />} />
             <Route path="leaderboard" element={<QuizLeaderboard />} />
           </Route>
+
+          <Route path="quiz/:from/:id" element={<AnsweringQuizPage />} />
         </Route>
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
