@@ -106,7 +106,7 @@ const App = () => {
               publicQuizzesLoading ? (
                 <LoadingSmall />
               ) : (
-                <QuizPage quizzes={publicQuizzes} />
+                <QuizPage quizzes={publicQuizzes} from={"public-quizzes"} />
               )
             }
           >
@@ -120,7 +120,7 @@ const App = () => {
               myQuizzesLoading ? (
                 <LoadingSmall />
               ) : (
-                <QuizPage quizzes={myQuizzes} />
+                <QuizPage quizzes={myQuizzes} from={"my-quizzes"} />
               )
             }
           >

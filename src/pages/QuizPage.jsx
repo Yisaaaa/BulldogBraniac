@@ -4,7 +4,7 @@ import { Outlet, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import PrimaryLinkButton from "../components/PrimaryLinkButton";
 
-const QuizPage = ({ quizzes }) => {
+const QuizPage = ({ quizzes, from }) => {
   const id = useParams().id;
   const quiz = quizzes.find((quiz) => quiz.id === id);
   const user = useSelector((state) => state.user);
@@ -27,10 +27,13 @@ const QuizPage = ({ quizzes }) => {
           <p className="text-xl font-semibold">
             Current Score:{" "}
             {user.quizzesTaken[quiz.id]
-              ? user.quizzesTaken[quiz.id]
+              ? `${user.quizzesTaken[quiz.id]} out of ${quiz.content.length}`
               : "quiz not taken yet"}
           </p>
-          <PrimaryLinkButton className={"py-1 leading-none"}>
+          <PrimaryLinkButton
+            to={`/main/quiz/${from}/${id}`}
+            className={"py-1 leading-none"}
+          >
             Take Quiz
           </PrimaryLinkButton>
         </div>

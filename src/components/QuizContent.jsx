@@ -1,10 +1,12 @@
 import React from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import QnA from "./QnA";
+import { collectionGroup } from "firebase/firestore";
 
 const QuizContent = () => {
   const quiz = useOutletContext();
   const content = quiz.content;
+  console.log(quiz.content);
 
   return (
     <>
@@ -21,9 +23,12 @@ const QuizContent = () => {
       </div>
       <div className="w-full h-[2px] bg-[#ccc] mb-10"></div>
       <div className="w-[65%] max-h-[65%] mx-auto overflow-scroll scroll-smooth">
-        {content.map((item) => (
-          <QnA key={item.question} currentQuestion={item} answered={true} />
-        ))}
+        {content.map((item) => {
+          console.log(item);
+          return (
+            <QnA key={item.question} currentQuestion={item} answered={true} />
+          );
+        })}
       </div>
     </>
   );

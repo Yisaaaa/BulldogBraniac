@@ -29,10 +29,6 @@ const AnsweringQuizPage = () => {
 
   const score = useRef(0);
 
-  useEffect(() => {
-    setCurrentItem((prev) => prev + 1);
-  }, [step]);
-
   if (publicQuizzesLoading || myQuizzesLoading) {
     return <LoadingSmall />;
   }
@@ -50,7 +46,8 @@ const AnsweringQuizPage = () => {
       // Do something
     } else {
       setAnswer("");
-      setStep(step + 1);
+      setStep((prev) => prev + 1);
+      setCurrentItem((prev) => prev + 1);
     }
   };
 
@@ -77,12 +74,11 @@ const AnsweringQuizPage = () => {
               return (
                 <button
                   onClick={() => {
-                    if (!answer) {
-                      setAnswer(option);
-                    }
-
                     if (option === currentQuestion.answer) {
                       score.current += 1;
+                    }
+                    if (!answer) {
+                      setAnswer(option);
                     }
                   }}
                   key={option}

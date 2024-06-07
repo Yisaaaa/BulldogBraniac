@@ -27,7 +27,7 @@ const QuizDone = ({ score, questions, from, id }) => {
           </p>
         </div>
         <Link
-          to={`/main/${from}/${id}`}
+          to={`/main/${from}/${id}/content`}
           className="bg-primary text-white px-6 py-1 font-semibold text-lg rounded-lg self-end"
         >
           Done
