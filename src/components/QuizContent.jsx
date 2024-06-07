@@ -1,8 +1,6 @@
 import React from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import QnA from "./QnA";
-import { User } from "lucide-react";
-import { useSelector } from "react-redux";
 
 const QuizContent = () => {
   const quiz = useOutletContext();
@@ -24,11 +22,7 @@ const QuizContent = () => {
       <div className="w-full h-[2px] bg-[#ccc] mb-10"></div>
       <div className="w-[65%] max-h-[65%] mx-auto overflow-scroll scroll-smooth">
         {content.map((item) => (
-          <QnA
-            key={item.question}
-            answer={item.answer}
-            question={item.question}
-          />
+          <QnA key={item.question} currentQuestion={item} answered={true} />
         ))}
       </div>
     </>
