@@ -1,16 +1,21 @@
 import React, { useEffect, useReducer, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import LoadingSmall from "../components/LoadingSmall";
 import { Progress } from "@/components/ui/progress";
 import QuizInfoHeader from "../components/QuizInfoHeader";
 import QnA from "../components/QnA";
 import QuizDone from "../components/QuizDone";
+import { updateRecentlyTakenQuizzes } from "../services";
+import { setRecentQuizzes } from "../reducers/quizSlice";
 
 const AnsweringQuizPage = () => {
-  const { publicQuizzesLoading, myQuizzesLoading } = useSelector(
+  const { publicQuizzesLoading, myQuizzesLoading, recentQuizzes } = useSelector(
     (state) => state.quizzes
   );
+  const user = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
 
   const id = useParams().id;
   const from = useParams().from;
@@ -38,12 +43,24 @@ const AnsweringQuizPage = () => {
   const questions = quiz.content;
   const currentQuestion = questions[currentItem];
 
-  const handleNext = () => {
+  const handleNext = async () => {
     console.log(step, questions.length, currentItem);
     if (currentItem === questions.length - 1) {
       console.log("Quiz done");
       setQuizDone(true);
       // Do something
+      // Updating recentQuizzes of user
+      try {
+        const newRecentQuizzes = await updateRecentlyTakenQuizzes(
+          quiz,
+          recentQuizzes,
+          user.id
+        );
+        dispatch(setRecentQuizzes(newRecentQuizzes));
+      } catch (e) {
+        console.log("Something went wrong setting new recent quizzes");
+        console.log(e);
+      }
     } else {
       setAnswer("");
       setStep((prev) => prev + 1);

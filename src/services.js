@@ -129,6 +129,27 @@ const writeQuizToDb = async (quiz, user, dispatch) => {
   }
 };
 
+export const updateRecentlyTakenQuizzes = async (
+  recentQuiz,
+  recentQuizzes,
+  userId
+) => {
+  if (recentQuizzes.length === 3) {
+    recentQuizzes = recentQuizzes.slice(0, -1);
+  }
+
+  const newRecentQuizzes = [recentQuiz, ...recentQuizzes];
+
+  const userRef = doc(db, "users", userId);
+  setDoc(
+    userRef,
+    { recentQuizzes: newRecentQuizzes.map((quiz) => quiz.id) },
+    { merge: true }
+  );
+
+  return newRecentQuizzes;
+};
+
 export {
   fetchQuizzes,
   fetchPublicQuizzes,
