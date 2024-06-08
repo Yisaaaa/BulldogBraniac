@@ -10,8 +10,12 @@ import { updateRecentlyTakenQuizzes } from "../services";
 import { setRecentQuizzes } from "../reducers/quizSlice";
 
 const AnsweringQuizPage = () => {
-  const { publicQuizzesLoading, myQuizzesLoading, recentQuizzesLoading } =
-    useSelector((state) => state.quizzes);
+  const {
+    publicQuizzesLoading,
+    myQuizzesLoading,
+    recentQuizzesLoading,
+    recentQuizzes,
+  } = useSelector((state) => state.quizzes);
   const user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -29,7 +33,7 @@ const AnsweringQuizPage = () => {
     } else if (from === "public-quizzes") {
       return state.quizzes.publicQuizzes;
     } else {
-      return state.quizzes.recentQuizzes;
+      return recentQuizzes;
     }
   });
 

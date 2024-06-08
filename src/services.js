@@ -134,18 +134,25 @@ export const updateRecentlyTakenQuizzes = async (
   recentQuizzes,
   userId
 ) => {
-  if (recentQuizzes.length === 3) {
-    recentQuizzes = recentQuizzes.slice(0, -1);
+  let newRecentQuizzes = [
+    recentQuiz,
+    ...recentQuizzes.filter((quiz) => quiz.id !== recentQuiz.id),
+  ];
+  console.log(newRecentQuizzes);
+
+  if (newRecentQuizzes.length === 4) {
+    newRecentQuizzes = newRecentQuizzes.slice(0, -1);
   }
 
-  const newRecentQuizzes = [recentQuiz, ...recentQuizzes];
+  const newRecentQuizzesModified = [
+    recentQuiz.id,
+    ...recentQuizzes
+      .filter((quiz) => quiz.id !== recentQuiz.id)
+      .map((quiz) => quiz.id),
+  ];
 
   const userRef = doc(db, "users", userId);
-  setDoc(
-    userRef,
-    { recentQuizzes: newRecentQuizzes.map((quiz) => quiz.id) },
-    { merge: true }
-  );
+  await updateDoc(userRef, { recentQuizzes: newRecentQuizzesModified });
 
   return newRecentQuizzes;
 };

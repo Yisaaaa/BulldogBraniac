@@ -111,7 +111,7 @@ const App = () => {
               recentQuizzesLoading ? (
                 <LoadingSmall />
               ) : (
-                <QuizPage quizzes={recentQuizzes} from={"recent-quizzes"} />
+                <QuizPage quizzes={recentQuizzes} from={"overview"} />
               )
             }
           >
