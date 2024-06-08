@@ -146,7 +146,7 @@ export const updateRecentlyTakenQuizzes = async (
 
   const newRecentQuizzesModified = [
     recentQuiz.id,
-    ...recentQuizzes
+    ...newRecentQuizzes
       .filter((quiz) => quiz.id !== recentQuiz.id)
       .map((quiz) => quiz.id),
   ];
