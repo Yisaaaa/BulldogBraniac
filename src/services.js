@@ -59,6 +59,19 @@ const generateQuizFromUrl = async (url) => {
       answer: "correct answer from options"
   }
 ]
+
+ Im prone to having error especially after these lines:
+     const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
+  
+    When I try to run JSON.parse(text), im getting this error: SyntaxError: JSON.parse: unexpected character at line 1 column 1 of the JSON data
+
+  I suspect that it is because when I print the text, I get something like:
+
+  '''json
+  data...
+  '''
   
   Here is the link:${url}`;
 
@@ -80,7 +93,20 @@ const generateQuizFromNotes = async (notes) => {
       answer: "correct answer from options"
   }
 ]
+
+ Im prone to having error especially after these lines:
+     const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
   
+    When I try to run JSON.parse(text), im getting this error: SyntaxError: JSON.parse: unexpected character at line 1 column 1 of the JSON data
+
+  I suspect that it is because when I print the text, I get something like:
+
+  '''json
+  data...
+  '''
+
   Here is the notes: ${notes}`;
 
   try {
@@ -101,7 +127,9 @@ const generateQuiz = async (prompt) => {
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
-    return JSON.parse(text);
+    const cleanedText = text.replace(/'''json/g, "").trim();
+    console.log(cleanedText);
+    return JSON.parse(cleanedText);
   } catch (e) {
     throw e;
   }
