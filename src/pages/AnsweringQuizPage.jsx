@@ -10,9 +10,8 @@ import { updateRecentlyTakenQuizzes } from "../services";
 import { setRecentQuizzes } from "../reducers/quizSlice";
 
 const AnsweringQuizPage = () => {
-  const { publicQuizzesLoading, myQuizzesLoading, recentQuizzes } = useSelector(
-    (state) => state.quizzes
-  );
+  const { publicQuizzesLoading, myQuizzesLoading, recentQuizzesLoading } =
+    useSelector((state) => state.quizzes);
   const user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -22,9 +21,16 @@ const AnsweringQuizPage = () => {
   // console.log(id, from);
 
   const quizzes = useSelector((state) => {
-    return from === "my-quizzes"
-      ? state.quizzes.myQuizzes
-      : state.quizzes.publicQuizzes;
+    // return from === "my-quizzes"
+    //   ? state.quizzes.myQuizzes
+    //   : state.quizzes.publicQuizzes;
+    if (from === "my-quizzes") {
+      return state.quizzes.myQuizzes;
+    } else if (from === "public-quizzes") {
+      return state.quizzes.publicQuizzes;
+    } else {
+      return state.quizzes.recentQuizzes;
+    }
   });
 
   const [step, setStep] = useState(0);
@@ -34,7 +40,7 @@ const AnsweringQuizPage = () => {
 
   const score = useRef(0);
 
-  if (publicQuizzesLoading || myQuizzesLoading) {
+  if (publicQuizzesLoading || myQuizzesLoading || recentQuizzesLoading) {
     return <LoadingSmall />;
   }
 

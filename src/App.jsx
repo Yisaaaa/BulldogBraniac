@@ -42,8 +42,14 @@ const App = () => {
 
   console.log("user", user);
 
-  const { publicQuizzes, myQuizzes, publicQuizzesLoading, myQuizzesLoading } =
-    useSelector((state) => state.quizzes);
+  const {
+    publicQuizzes,
+    myQuizzes,
+    recentQuizzes,
+    recentQuizzesLoading,
+    publicQuizzesLoading,
+    myQuizzesLoading,
+  } = useSelector((state) => state.quizzes);
   const matchSignInUrl = useMatch("/signin");
 
   useEffect(() => {
@@ -99,6 +105,20 @@ const App = () => {
           element={user ? <MainPage /> : <Navigate replace to="/signin" />}
         >
           <Route path="overview" element={<HomePage />} />
+          <Route
+            path="overview/:id/*"
+            element={
+              recentQuizzesLoading ? (
+                <LoadingSmall />
+              ) : (
+                <QuizPage quizzes={recentQuizzes} from={"recent-quizzes"} />
+              )
+            }
+          >
+            <Route path="content" element={<QuizContent />} />
+            <Route path="leaderboard" element={<QuizLeaderboard />} />
+          </Route>
+
           <Route path="public-quizzes" element={<PublicQuizzesPage />} />
           <Route
             path="public-quizzes/:id/*"
