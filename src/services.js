@@ -185,7 +185,7 @@ export const updateQuizzesTakenByUser = async (
       total: quizTaken.content.length,
       score,
     },
-    ...quizzesTaken.filter((quiz) => quiz.id !== quizTaken.id),
+    ...quizzesTaken,
   ];
 
   await updateUserProperty({ quizzesTaken: newQuizzesTaken }, userId);
