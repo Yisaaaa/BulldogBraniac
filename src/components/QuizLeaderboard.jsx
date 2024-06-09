@@ -1,15 +1,22 @@
 import React from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import { FaCrown, FaMedal } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const QuizLeaderboard = () => {
   const quiz = useOutletContext();
   const leaderboard = quiz.leaderboard;
   console.log(leaderboard);
+  const userId = useSelector((state) => state.user.id);
+
+  const sortedLeaderboard = leaderboard.toSorted((a, b) => {
+    console.log(b.score - a.score);
+    return b.score - a.score;
+  });
 
   const leaderboardComponent = [];
 
-  leaderboard.forEach((row, i) => {
+  sortedLeaderboard.forEach((row, i) => {
     let rankingIcon;
 
     if (i === 0) {
@@ -35,6 +42,7 @@ const QuizLeaderboard = () => {
 
     leaderboardComponent.push(
       <div
+        key={row.userId}
         className={`text-[#888] text-xl items-center font-semibold grid grid-cols-[10%_60%_1fr] px-12 pt-6 pb-2 ${
           !isEven ? "bg-slate-200" : ""
         }`}

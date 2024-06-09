@@ -18,9 +18,11 @@ export const quizSlice = createSlice({
         publicQuizzesLoading: false,
       };
     },
+
     setMyQuizzes: (state, action) => {
       return { ...state, myQuizzes: action.payload, myQuizzesLoading: false };
     },
+
     setRecentQuizzes: (state, action) => {
       return {
         ...state,
@@ -28,6 +30,7 @@ export const quizSlice = createSlice({
         recentQuizzesLoading: false,
       };
     },
+
     addNewQuiz: (state, action) => {
       return { ...state, myQuizzes: [...state.myQuizzes, action.payload] };
     },

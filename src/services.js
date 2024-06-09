@@ -140,6 +140,11 @@ const updateUserProperty = async (field, userId) => {
   await updateDoc(userRef, field);
 };
 
+const updateQuizProperty = async (field, quizId) => {
+  const quizRef = doc(db, "quizzes", quizId);
+  await updateDoc(quizRef, field);
+};
+
 export const updateRecentlyTakenQuizzes = async (
   recentQuiz,
   recentQuizzes,
@@ -186,6 +191,22 @@ export const updateQuizzesTakenByUser = async (
   await updateUserProperty({ quizzesTaken: newQuizzesTaken }, userId);
 
   return newQuizzesTaken;
+};
+
+export const updateQuizLeaderboard = async (quiz, score, user) => {
+  const newLeaderboard = [
+    {
+      profileUrl: user.profileUrl,
+      score,
+      userId: user.id,
+      username: user.username,
+    },
+    ...quiz.leaderboard.filter((rankedUser) => rankedUser.userId !== user.id),
+  ];
+
+  await updateQuizProperty({ leaderboard: newLeaderboard }, quiz.id);
+
+  return newLeaderboard;
 };
 
 export {

@@ -7,10 +7,13 @@ import QuizInfoHeader from "../components/QuizInfoHeader";
 import QnA from "../components/QnA";
 import QuizDone from "../components/QuizDone";
 import {
+  updateQuizLeaderboard,
   updateQuizzesTakenByUser,
   updateRecentlyTakenQuizzes,
+  fetchPublicQuizzes,
+  fetchQuizzes,
 } from "../services";
-import { setRecentQuizzes } from "../reducers/quizSlice";
+import { setPublicQuizzes, setRecentQuizzes } from "../reducers/quizSlice";
 import { setQuizzesTaken } from "../reducers/userSlice";
 
 const AnsweringQuizPage = () => {
@@ -86,6 +89,29 @@ const AnsweringQuizPage = () => {
         dispatch(setQuizzesTaken(newQuizzesTaken));
       } catch (e) {
         console.log("Something went wrong setting new quizzes taken");
+        console.log(e);
+      }
+
+      try {
+        await updateQuizLeaderboard(quiz, score.current, user);
+
+        // Fetching recent quizzes
+        await fetchQuizzes(user.recentQuizzes).then((res) => {
+          dispatch(setRecentQuizzes(res));
+        });
+
+        //Fetching the public quizzes
+        await fetchPublicQuizzes(user.id).then((res) => {
+          console.log(res);
+          dispatch(setPublicQuizzes(res));
+        });
+
+        // Fetching signed in user's quizzes
+        await fetchQuizzes(user.myQuizzes).then((res) => {
+          dispatch(setMyQuizzes(res));
+        });
+      } catch (e) {
+        console.log("Something went wrong when setting new leaderboard");
         console.log(e);
       }
     } else {
