@@ -14,9 +14,11 @@ const ProgressOverview = () => {
     Humanities: 0,
     English: 0,
   };
+  let avgScore = [];
 
   user.quizzesTaken.forEach((quiz) => {
     subjects[quiz.subject] += 1;
+    avgScore = [...avgScore, quiz.score / quiz.total];
   });
 
   let mostFavorite = "Math";
@@ -26,6 +28,9 @@ const ProgressOverview = () => {
       mostFavorite = key;
     }
   });
+
+  avgScore =
+    (avgScore.reduce((prev, curr) => prev + curr, 0) / avgScore.length) * 100;
 
   return (
     <div className="border-2 border-[#ddd] bg-white rounded-lg px-4 pt-2 pb-4 mb-8">
@@ -37,7 +42,7 @@ const ProgressOverview = () => {
         </li>
         <li className="flex gap-3 items-center text-lg font-medium">
           <FaChartLine className="text-2xl ml-1" />
-          <span>Average Score: {user.avgScore}</span>
+          <span>Average Score: {Math.round(avgScore)}</span>
         </li>
         <li className="flex gap-2 items-center text-lg font-medium">
           <MdFavorite className="text-3xl" />
