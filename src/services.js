@@ -174,7 +174,12 @@ export const updateQuizzesTakenByUser = async (
   userId
 ) => {
   const newQuizzesTaken = [
-    { subject: quizTaken.subject, id: quizTaken.id, score },
+    {
+      subject: quizTaken.subject,
+      id: quizTaken.id,
+      total: quizTaken.content.length,
+      score,
+    },
     ...quizzesTaken.filter((quiz) => quiz.id !== quizTaken.id),
   ];
 
