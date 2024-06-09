@@ -13,7 +13,11 @@ import {
   fetchPublicQuizzes,
   fetchQuizzes,
 } from "../services";
-import { setPublicQuizzes, setRecentQuizzes } from "../reducers/quizSlice";
+import {
+  setPublicQuizzes,
+  setRecentQuizzes,
+  setMyQuizzes,
+} from "../reducers/quizSlice";
 import { setQuizzesTaken } from "../reducers/userSlice";
 
 const AnsweringQuizPage = () => {
@@ -67,17 +71,11 @@ const AnsweringQuizPage = () => {
       setQuizDone(true);
       // Do something
       // Updating recentQuizzes of user
-      try {
-        const newRecentQuizzes = await updateRecentlyTakenQuizzes(
-          quiz,
-          recentQuizzes,
-          user.id
-        );
-        dispatch(setRecentQuizzes(newRecentQuizzes));
-      } catch (e) {
-        console.log("Something went wrong setting new recent quizzes");
-        console.log(e);
-      }
+      // try {
+      // } catch (e) {
+      //   console.log("Something went wrong setting new recent quizzes");
+      //   console.log(e);
+      // }
 
       try {
         const newQuizzesTaken = await updateQuizzesTakenByUser(
@@ -96,9 +94,18 @@ const AnsweringQuizPage = () => {
         await updateQuizLeaderboard(quiz, score.current, user);
 
         // Fetching recent quizzes
-        await fetchQuizzes(user.recentQuizzes).then((res) => {
-          dispatch(setRecentQuizzes(res));
-        });
+
+        const newRecentQuizzes = await updateRecentlyTakenQuizzes(
+          quiz,
+          recentQuizzes,
+          user.id
+        );
+
+        await fetchQuizzes(newRecentQuizzes.map((quiz) => quiz.id)).then(
+          (res) => {
+            dispatch(setRecentQuizzes(res));
+          }
+        );
 
         //Fetching the public quizzes
         await fetchPublicQuizzes(user.id).then((res) => {
