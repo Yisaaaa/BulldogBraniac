@@ -7,9 +7,13 @@ export const userSlice = createSlice({
     setUser: (state, action) => {
       return action.payload;
     },
+
+    setQuizzesTaken: (state, action) => {
+      return { ...state, quizzesTaken: action.payload };
+    },
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, setQuizzesTaken } = userSlice.actions;
 
 export default userSlice.reducer;

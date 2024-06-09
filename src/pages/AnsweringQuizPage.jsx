@@ -6,8 +6,12 @@ import { Progress } from "@/components/ui/progress";
 import QuizInfoHeader from "../components/QuizInfoHeader";
 import QnA from "../components/QnA";
 import QuizDone from "../components/QuizDone";
-import { updateRecentlyTakenQuizzes } from "../services";
+import {
+  updateQuizzesTakenByUser,
+  updateRecentlyTakenQuizzes,
+} from "../services";
 import { setRecentQuizzes } from "../reducers/quizSlice";
+import { setQuizzesTaken } from "../reducers/userSlice";
 
 const AnsweringQuizPage = () => {
   const {
@@ -69,6 +73,19 @@ const AnsweringQuizPage = () => {
         dispatch(setRecentQuizzes(newRecentQuizzes));
       } catch (e) {
         console.log("Something went wrong setting new recent quizzes");
+        console.log(e);
+      }
+
+      try {
+        const newQuizzesTaken = await updateQuizzesTakenByUser(
+          score.current,
+          quiz,
+          user.quizzesTaken,
+          user.id
+        );
+        dispatch(setQuizzesTaken(newQuizzesTaken));
+      } catch (e) {
+        console.log("Something went wrong setting new quizzes taken");
         console.log(e);
       }
     } else {

@@ -9,8 +9,11 @@ const QuizPage = ({ quizzes, from }) => {
   const quiz = quizzes.find((quiz) => quiz.id === id);
   const user = useSelector((state) => state.user);
 
+  const quizScore = user.quizzesTaken.find(
+    (quizTaken) => quizTaken.id === id
+  )?.score;
+
   console.log(quiz);
-  console.log(user.quizzesTaken[quiz.id]);
 
   return (
     // <div className="flex flex-col relative overflow-scroll">
@@ -26,8 +29,8 @@ const QuizPage = ({ quizzes, from }) => {
         <div className="flex justify-between mb-2 ">
           <p className="text-xl font-semibold">
             Current Score:{" "}
-            {user.quizzesTaken[quiz.id]
-              ? `${user.quizzesTaken[quiz.id]} out of ${quiz.content.length}`
+            {quizScore
+              ? `${quizScore} out of ${quiz.content.length}`
               : "quiz not taken yet"}
           </p>
           <PrimaryLinkButton

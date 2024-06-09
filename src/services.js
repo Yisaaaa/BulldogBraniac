@@ -157,7 +157,7 @@ const writeQuizToDb = async (quiz, user, dispatch) => {
   }
 };
 
-const updateUserWithField = async (field, userId) => {
+const updateUserProperty = async (field, userId) => {
   const userRef = doc(db, "users", userId);
   await updateDoc(userRef, field);
 };
@@ -184,12 +184,25 @@ export const updateRecentlyTakenQuizzes = async (
       .map((quiz) => quiz.id),
   ];
 
-  await updateUserWithField(
-    { recentQuizzes: newRecentQuizzesModified },
-    userId
-  );
+  await updateUserProperty({ recentQuizzes: newRecentQuizzesModified }, userId);
 
   return newRecentQuizzes;
+};
+
+export const updateQuizzesTakenByUser = async (
+  score,
+  quizTaken,
+  quizzesTaken,
+  userId
+) => {
+  const newQuizzesTaken = [
+    { subject: quizTaken.subject, id: quizTaken.id, score },
+    ...quizzesTaken.filter((quiz) => quiz.id !== quizTaken.id),
+  ];
+
+  await updateUserProperty({ quizzesTaken: newQuizzesTaken }, userId);
+
+  return newQuizzesTaken;
 };
 
 export {
