@@ -29,7 +29,7 @@ const QuizPage = ({ quizzes, from }) => {
         <div className="flex justify-between mb-2 ">
           <p className="text-xl font-semibold">
             Current Score:{" "}
-            {quizScore
+            {quizScore !== undefined
               ? `${quizScore} out of ${quiz.content.length}`
               : "quiz not taken yet"}
           </p>
