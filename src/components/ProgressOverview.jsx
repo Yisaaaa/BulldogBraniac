@@ -6,31 +6,41 @@ import { FaChartLine } from "react-icons/fa6";
 const ProgressOverview = () => {
   const user = useSelector((state) => state.user);
 
-  const subjects = {
-    Math: 0,
-    Computer: 0,
-    Science: 0,
-    PE: 0,
-    Humanities: 0,
-    English: 0,
-  };
-  let avgScore = [];
+  let mostFavorite;
+  let avgScore;
 
-  user.quizzesTaken.forEach((quiz) => {
-    subjects[quiz.subject] += 1;
-    avgScore = [...avgScore, quiz.score / quiz.total];
-  });
+  console.log(user.quizzesTaken.length);
 
-  let mostFavorite = "Math";
+  if (user.quizzesTaken.length) {
+    const subjects = {
+      Math: 0,
+      Computer: 0,
+      Science: 0,
+      PE: 0,
+      Humanities: 0,
+      English: 0,
+    };
+    avgScore = [];
 
-  Object.keys(subjects).forEach((key) => {
-    if (subjects[key] > subjects[mostFavorite]) {
-      mostFavorite = key;
-    }
-  });
+    user.quizzesTaken.forEach((quiz) => {
+      subjects[quiz.subject] += 1;
+      avgScore = [...avgScore, quiz.score / quiz.total];
+    });
 
-  avgScore =
-    (avgScore.reduce((prev, curr) => prev + curr, 0) / avgScore.length) * 100;
+    mostFavorite = "Math";
+
+    Object.keys(subjects).forEach((key) => {
+      if (subjects[key] > subjects[mostFavorite]) {
+        mostFavorite = key;
+      }
+    });
+
+    avgScore =
+      (avgScore.reduce((prev, curr) => prev + curr, 0) / avgScore.length) * 100;
+  } else {
+    mostFavorite = "None";
+    avgScore = 0;
+  }
 
   return (
     <div className="border-2 border-[#ddd] bg-white rounded-lg px-4 pt-2 pb-4 mb-8">
