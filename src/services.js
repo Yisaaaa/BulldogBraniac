@@ -49,31 +49,7 @@ const fetchPublicQuizzes = async (userId) => {
 };
 
 const generateQuizFromUrl = async (url) => {
-  const prompt = `Im going to give you an article and your job is to make a multiple choice quiz out of it. Produce at least 10 items if possible. Your output should be in a json format. You may not include any other data like title and description. Just focus on the questions. Don't inlude any other text because I will be using JSON.parse() method to convert your output directly into json like adding a json text at the very top.
-
-  Follow this json schema like this:
-[
-  {
-      question: "question here",
-      options: ["a", "b", "and so on"],
-      answer: "correct answer from options"
-  }
-]
-
- Im prone to having error especially after these lines:
-     const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
-  
-    When I try to run JSON.parse(text), im getting this error: SyntaxError: JSON.parse: unexpected character at line 1 column 1 of the JSON data
-
-  I suspect that it is because when I print the text, I get something like:
-
-  '''json
-  data...
-  '''
-  
-  Here is the link:${url}`;
+  const prompt = `Here is the url: ${notes}`;
 
   try {
     return await generateQuiz(prompt);
@@ -83,7 +59,17 @@ const generateQuizFromUrl = async (url) => {
 };
 
 const generateQuizFromNotes = async (notes) => {
-  const prompt = `Im going to give you an article and your job is to make a multiple choice quiz out of it. Produce at least 10 items if possible. Your output should be in a json format. You may not include any other data like title and description. Just focus on the questions. Don't inlude any other text because I will be using JSON.parse() method to convert your output directly into json like adding a json text at the very top.
+  const prompt = `Here is the notes: ${notes}`;
+
+  try {
+    return await generateQuiz(prompt);
+  } catch (e) {
+    throw e;
+  }
+};
+
+const generateQuiz = async (prompt) => {
+  const fullPrompt = `Im going to give you an article and your job is to make a multiple choice quiz out of it. Produce at least 10 items if possible. Your output should be in a json format. You may not include any other data like title and description. Just focus on the questions. Don't inlude any other text because I will be using JSON.parse() method to convert your output directly into json like adding a json text at the very top. Also make sure to randomize the index of the answer in the options array and ensure that the answer is not constantly the first one in the options array.
 
   Follow this json schema like this:
 [
@@ -106,17 +92,9 @@ const generateQuizFromNotes = async (notes) => {
   '''json
   data...
   '''
+  
+  ${prompt}`;
 
-  Here is the notes: ${notes}`;
-
-  try {
-    return await generateQuiz(prompt);
-  } catch (e) {
-    throw e;
-  }
-};
-
-const generateQuiz = async (prompt) => {
   // Access your API key (see "Set up your API key" above)
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_KEY);
 
@@ -124,7 +102,7 @@ const generateQuiz = async (prompt) => {
   const model = genAI.getGenerativeModel({ model: "gemini-1.0-pro" });
 
   try {
-    const result = await model.generateContent(prompt);
+    const result = await model.generateContent(fullPrompt);
     const response = await result.response;
     const text = response.text();
     const cleanedText = text.replace(/'''json/g, "").trim();
