@@ -49,7 +49,7 @@ const fetchPublicQuizzes = async (userId) => {
 };
 
 const generateQuizFromUrl = async (url) => {
-  const prompt = `Here is the url: ${notes}`;
+  const prompt = `Here is the url: ${url}`;
 
   try {
     return await generateQuiz(prompt);

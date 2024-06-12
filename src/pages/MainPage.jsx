@@ -31,7 +31,7 @@ const MainPage = () => {
     console.log("setting user");
     dispatch(setUser(null));
     signOut(auth);
-    navigate("/signin");
+    navigate("/");
   };
 
   return (
