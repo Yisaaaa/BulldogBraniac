@@ -8,7 +8,7 @@ const QuizDone = ({ score, questions, from, id }) => {
 
   return (
     <>
-      <Confetti recycle={false} numberOfPieces={500} />
+      <Confetti recycle={false} numberOfPieces={500} className="w-full" />
       <div className="flex flex-col">
         <h1 className="text-4xl font-semibold mt-5 mb-16 text-center">
           Congratulations on finishing the Quiz!
