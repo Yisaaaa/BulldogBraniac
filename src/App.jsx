@@ -55,34 +55,36 @@ const App = () => {
   useEffect(() => {
     const subscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        console.log("user logged in");
-        const userRef = doc(db, `users/${user.uid}`);
-        user = JSON.stringify((await getDoc(userRef)).data());
-        dispatch(setUser(JSON.parse(user)));
+        try {
+          console.log("user logged in");
+          const userRef = doc(db, `users/${user.uid}`);
+          user = JSON.stringify((await getDoc(userRef)).data());
+          dispatch(setUser(JSON.parse(user)));
 
-        user = JSON.parse(user);
+          user = JSON.parse(user);
 
-        if (matchSignInUrl) {
-          navigate("/main");
-        }
+          if (matchSignInUrl) {
+            navigate("/main");
+          }
 
-        setIsLoading(false);
+          setIsLoading(false);
 
-        // Fetching recent quizzes
-        await fetchQuizzes(user.recentQuizzes).then((res) => {
-          dispatch(setRecentQuizzes(res));
-        });
+          // Fetching recent quizzes
+          await fetchQuizzes(user.recentQuizzes).then((res) => {
+            dispatch(setRecentQuizzes(res));
+          });
 
-        //Fetching the public quizzes
-        await fetchPublicQuizzes(user.id).then((res) => {
-          console.log(res);
-          dispatch(setPublicQuizzes(res));
-        });
+          //Fetching the public quizzes
+          await fetchPublicQuizzes(user.id).then((res) => {
+            console.log(res);
+            dispatch(setPublicQuizzes(res));
+          });
 
-        // Fetching signed in user's quizzes
-        await fetchQuizzes(user.myQuizzes).then((res) => {
-          dispatch(setMyQuizzes(res));
-        });
+          // Fetching signed in user's quizzes
+          await fetchQuizzes(user.myQuizzes).then((res) => {
+            dispatch(setMyQuizzes(res));
+          });
+        } catch (e) {}
       } else {
         console.log("no user");
         setIsLoading(false);
