@@ -39,3 +39,5 @@ const profileUrls = [
   "warlus",
   "wolverine",
 ];
+
+export default profileUrls;
